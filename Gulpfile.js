@@ -40,7 +40,7 @@ gulp.task('js-lint', function() {
 /* Js task */
 gulp.task('js-concat', function() {
   return gulp.src([
-      'static/bower_components/jquery/dist/jquery.min.js',
+      'static/bower_components/angular2-build/angular2.min.js',
       'static/js/main.js'
     ])
     .pipe(concat('all.js'))

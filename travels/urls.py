@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from rest_framework_jwt.views import obtain_jwt_token
 from travel.views import HomePageView
 
 urlpatterns = [
     url(r'^$', HomePageView.as_view(), name='main'),
+
+    url(r'^api-token-auth/', obtain_jwt_token),
 
     url(r'^admin/', admin.site.urls),
 ]
