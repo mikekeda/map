@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { CountriesService } from './countries.service';
 import { MapComponent } from './map/map.component';
 
 @NgModule({
@@ -16,7 +17,7 @@ import { MapComponent } from './map/map.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [CountriesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
