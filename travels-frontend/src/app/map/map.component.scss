@@ -1,0 +1,9 @@
+path {
+    fill: #aaa;
+    &:hover {
+        fill: #777;
+    }
+    &.visited {
+        fill: #555;
+    }
+}
