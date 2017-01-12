@@ -7,11 +7,13 @@ import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { AppComponent } from './app.component';
 import { CountriesService } from './countries.service';
 import { MapComponent } from './map/map.component';
+import { FacebookloginComponent } from './facebooklogin/facebooklogin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapComponent
+    MapComponent,
+    FacebookloginComponent
   ],
   imports: [
     BrowserModule,
