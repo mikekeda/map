@@ -6,7 +6,7 @@ import json
 
 class ApiView(View):
     def get(self, request):
-        response = {'countries': []}
+        response = {'countries': ['UA']}
         access_token = request.GET.get('t')
         if access_token:
             try:
