@@ -5,10 +5,12 @@ import { COUNTRIES } from './countries';
 
 import { Observable }     from 'rxjs/Observable';
 
+declare var FB: any;
+
 @Injectable()
 export class CountriesService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private countriesUrl = 'api/countries';  // URL to web api
+  private countriesUrl = 'http://localhost:8000/api/countries';
 
   constructor(private http: Http) { }
 
@@ -36,8 +38,10 @@ export class CountriesService {
     return Promise.resolve(COUNTRIES);
   }
 
-  getVisitedCountries (): Promise<Array<string>> {
-    return this.http.get(this.countriesUrl)
+  getVisitedCountries (access_token: string): Promise<Array<string>> {
+    console.log('FB');
+    console.log(access_token);
+    return this.http.post(this.countriesUrl, {'access_token': access_token})
                     .toPromise()
                     .then(this.extractData)
                     .catch(this.handleError);

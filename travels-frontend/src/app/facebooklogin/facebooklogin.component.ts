@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { CountriesService } from '../countries.service';
+
 declare var FB: any;
 
 @Component({
@@ -9,7 +11,7 @@ declare var FB: any;
 })
 export class FacebookloginComponent implements OnInit {
 
-  constructor() {
+  constructor(private countriesService: CountriesService) {
     FB.init({
       appId      : '674727196042358',
       cookie     : false,  // enable cookies to allow the server to access
@@ -21,8 +23,9 @@ export class FacebookloginComponent implements OnInit {
   }
 
   onFacebookLoginClick() {
-    FB.login(function(result) {
-        console.log(result);
+    FB.login((result: any) => {
+      this.countriesService.getVisitedCountries(result.authResponse.accessToken)
+        .then();
     }, { scope: 'user_friends' });
   }
 

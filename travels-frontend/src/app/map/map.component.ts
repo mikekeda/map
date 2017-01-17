@@ -14,12 +14,13 @@ export class MapComponent implements OnInit {
 
   countries: Country[] = [];
   visitedCountries = [];
+  access_token: string;
   errorMessage: string;
 
   ngOnInit(): void {
     this.countriesService.getCountries()
       .then(countries => this.countries = countries);
-    this.countriesService.getVisitedCountries()
+    this.countriesService.getVisitedCountries(this.access_token)
       .then(
         visitedCountries => this.visitedCountries = visitedCountries,
         error => this.errorMessage = <any>error
