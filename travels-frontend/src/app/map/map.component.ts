@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
 import { Country } from '../country';
 import { CountriesService } from '../countries.service';
+
+declare var FB: any;
 
 @Component({
   selector: 'app-map',
@@ -12,6 +15,7 @@ export class MapComponent implements OnInit {
 
   constructor(private countriesService: CountriesService) { }
 
+  subscription: Subscription;
   countries: Country[] = [];
   visitedCountries = [];
   access_token: string;
@@ -20,17 +24,21 @@ export class MapComponent implements OnInit {
   ngOnInit(): void {
     this.countriesService.getCountries()
       .then(countries => this.countries = countries);
-    this.countriesService.getVisitedCountries(this.access_token)
-      .subscribe(
-        visitedCountries => this.visitedCountries = visitedCountries,
-        error => this.errorMessage = <any>error
-      );
+    this.subscription = this.countriesService.visitedCountries$
+      .subscribe(visitedCountries => this.visitedCountries = visitedCountries)
   }
 
   selectCountry(country): void {
-    var index = this.visitedCountries.indexOf(country.id);
+    let index = this.visitedCountries.indexOf(country.id);
+    let access_token = FB.getAuthResponse()['accessToken'] || '';
+    let is_selected = index === -1;
+    let country_ids = {};
 
-    if (index === -1) {
+    country_ids[country.id] = is_selected;
+
+    this.countriesService.setVisitedCountries(country_ids, access_token);
+
+    if (is_selected) {
       this.visitedCountries.push(country.id);
     }
     else {

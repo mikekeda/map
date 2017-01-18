@@ -4,23 +4,22 @@ import { Country } from './country';
 import { COUNTRIES } from './countries';
 
 import { Observable }     from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 declare var FB: any;
 
 @Injectable()
 export class CountriesService {
-  //visitedCountriesUpdated:EventEmitter = new EventEmitter();
   private headers = new Headers({'Content-Type': 'application/json'});
   private countriesUrl = 'http://localhost:8000/api/countries';
 
-  visitedCountries = [];
+  private _visitedCountries = new BehaviorSubject<Array<string>>([]);
+  visitedCountries$ = this._visitedCountries.asObservable();
 
   constructor(private http: Http) { }
 
   private extractData(res: Response) {
     let body = res.json();
-    this.visitedCountries = body.countries || [];
-    //this.visitedCountriesUpdated.emit(this.visitedCountries);
     return body.countries || [];
   }
 
@@ -43,11 +42,17 @@ export class CountriesService {
     return Promise.resolve(COUNTRIES);
   }
 
-  getVisitedCountries (access_token: string): Observable<Array<string>> {
-    console.log('FB');
-    console.log(access_token);
+  getVisitedCountries (access_token: string) {
     return this.http.post(this.countriesUrl, {'access_token': access_token}, this.headers)
                     .map(this.extractData)
-                    .catch(this.handleError);
+                    .catch(this.handleError)
+                    .subscribe((countries: Array<string>) => this._visitedCountries.next(countries));
+  }
+
+  setVisitedCountries (country_ids: Object, access_token: string) {
+    return this.http.post(this.countriesUrl, {'country_ids': country_ids, 'access_token': access_token}, this.headers)
+                    .map(this.extractData)
+                    .catch(this.handleError)
+                    .subscribe((countries: Array<string>) => this._visitedCountries.next(countries));
   }
 }
