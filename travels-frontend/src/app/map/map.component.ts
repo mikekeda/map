@@ -21,7 +21,7 @@ export class MapComponent implements OnInit {
     this.countriesService.getCountries()
       .then(countries => this.countries = countries);
     this.countriesService.getVisitedCountries(this.access_token)
-      .then(
+      .subscribe(
         visitedCountries => this.visitedCountries = visitedCountries,
         error => this.errorMessage = <any>error
       );

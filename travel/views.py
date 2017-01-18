@@ -38,14 +38,15 @@ class ApiView(View):
         return response
 
     def post(self, request):
-        print request.POST
+        print request
         response = {'countries': ['FR']}
         try:
-            access_token = request.POST.get('access_token', False)
+            json_data = json.loads(request.body)
+            access_token = json_data.get('access_token')
             if access_token:
-                print access_token
                 fb_user = fb_get_user_data(access_token, ['id', 'name', 'picture'])
                 print fb_user
+                response = {'countries': ['UA']}
         except urllib2.URLError, e:
             response['error'] = e.code
 

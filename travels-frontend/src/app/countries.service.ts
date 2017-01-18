@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import { Country } from './country';
 import { COUNTRIES } from './countries';
@@ -9,13 +9,18 @@ declare var FB: any;
 
 @Injectable()
 export class CountriesService {
+  //visitedCountriesUpdated:EventEmitter = new EventEmitter();
   private headers = new Headers({'Content-Type': 'application/json'});
   private countriesUrl = 'http://localhost:8000/api/countries';
+
+  visitedCountries = [];
 
   constructor(private http: Http) { }
 
   private extractData(res: Response) {
     let body = res.json();
+    this.visitedCountries = body.countries || [];
+    //this.visitedCountriesUpdated.emit(this.visitedCountries);
     return body.countries || [];
   }
 
@@ -38,12 +43,11 @@ export class CountriesService {
     return Promise.resolve(COUNTRIES);
   }
 
-  getVisitedCountries (access_token: string): Promise<Array<string>> {
+  getVisitedCountries (access_token: string): Observable<Array<string>> {
     console.log('FB');
     console.log(access_token);
-    return this.http.post(this.countriesUrl, {'access_token': access_token})
-                    .toPromise()
-                    .then(this.extractData)
+    return this.http.post(this.countriesUrl, {'access_token': access_token}, this.headers)
+                    .map(this.extractData)
                     .catch(this.handleError);
   }
 }

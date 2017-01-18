@@ -24,9 +24,11 @@ export class FacebookloginComponent implements OnInit {
 
   onFacebookLoginClick() {
     FB.login((result: any) => {
+      //console.log(result.authResponse.accessToken);
+      this.countriesService.getVisitedCountries(result.authResponse.accessToken);
       this.countriesService.getVisitedCountries(result.authResponse.accessToken)
-        .then();
-    }, { scope: 'user_friends' });
+        .subscribe();
+    });
   }
 
   statusChangeCallback(resp) {
