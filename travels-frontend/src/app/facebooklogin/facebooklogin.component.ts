@@ -9,7 +9,7 @@ declare var FB: any;
   templateUrl: './facebooklogin.component.html',
   styleUrls: ['./facebooklogin.component.css']
 })
-export class FacebookloginComponent implements OnInit {
+export class FacebookloginComponent {
 
   constructor(private countriesService: CountriesService) {
     FB.init({
@@ -23,27 +23,22 @@ export class FacebookloginComponent implements OnInit {
   }
 
   onFacebookLoginClick() {
-    FB.login((result: any) => {
-      this.countriesService.getVisitedCountries(result.authResponse.accessToken);
-    });
-  }
-
-  statusChangeCallback(resp) {
-    if (resp.status === 'connected') {
-      // connect here with your server for facebook login by passing access token given by facebook
-    }
-    else if (resp.status === 'not_authorized') {
-
-    }
-    else {
-
-    }
-  };
-
-  ngOnInit() {
     FB.getLoginStatus(response => {
       this.statusChangeCallback(response);
     });
   }
 
+  statusChangeCallback(resp) {
+    if (resp.status === 'connected') {
+      this.countriesService.getVisitedCountries(resp.authResponse.accessToken);
+    }
+    else if (resp.status === 'not_authorized') {
+      FB.login((result: any) => {
+        this.countriesService.getVisitedCountries(result.authResponse.accessToken);
+      });
+    }
+    else {
+
+    }
+  }
 }
