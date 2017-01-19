@@ -30,19 +30,15 @@ export class MapComponent implements OnInit {
 
   selectCountry(country): void {
     let index = this.visitedCountries.indexOf(country.id);
-    let access_token = FB.getAuthResponse()['accessToken'] || '';
-    let is_selected = index === -1;
-    let country_ids = {};
+    let access_token = typeof FB.getAuthResponse === 'function' ? FB.getAuthResponse()['accessToken'] || '' : '';
 
-    country_ids[country.id] = is_selected;
-
-    this.countriesService.setVisitedCountries(country_ids, access_token);
-
-    if (is_selected) {
+    if (index === -1) {
       this.visitedCountries.push(country.id);
     }
     else {
       this.visitedCountries.splice(index, 1);
     }
+
+    this.countriesService.setVisitedCountries(this.visitedCountries, access_token);
   }
 }

@@ -2,6 +2,7 @@ from django.http import JsonResponse, HttpResponse
 from django.views.generic import View
 import urllib2
 import json
+from travel.models import UserProfile, Country
 
 
 def fb_get_user_data(access_token, fields):
@@ -46,6 +47,9 @@ class ApiView(View):
             if access_token:
                 fb_user = fb_get_user_data(access_token, ['id', 'name', 'picture'])
                 print fb_user
+                fid = fb_user.get('id', False)
+                if fid:
+                    user = UserProfile.objects.filter(fid=fid)
                 response = {'countries': ['UA']}
         except urllib2.URLError, e:
             response['error'] = e.code
