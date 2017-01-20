@@ -3,6 +3,7 @@ from django.views.generic import View
 import urllib2
 import json
 from travel.models import UserProfile, Country
+from django.contrib.auth.models import User
 
 
 def fb_get_user_data(access_token, fields):
@@ -12,9 +13,24 @@ def fb_get_user_data(access_token, fields):
     return json.loads(req.read())
 
 
+def generate_username(first_name, last_name):
+    val = "{0}{1}".format(first_name[0], last_name).lower()
+    x = 0
+    while True:
+        if x == 0 and User.objects.filter(username=val).count() == 0:
+            return val
+        else:
+            new_val = "{0}{1}".format(val, x)
+            if User.objects.filter(username=new_val).count() == 0:
+                return new_val
+        x += 1
+        if x > 1000000:
+            raise Exception("Name is super popular!")
+
+
 class ApiView(View):
     def get(self, request):
-        response = {'countries': ['FR']}
+        response = {'countries': []}
         try:
             access_token = request.POST.get('access_token', False)
             if access_token:
@@ -44,13 +60,34 @@ class ApiView(View):
         try:
             json_data = json.loads(request.body)
             access_token = json_data.get('access_token')
+            countries = json_data.get('country_ids', [])
             if access_token:
-                fb_user = fb_get_user_data(access_token, ['id', 'name', 'picture'])
-                print fb_user
+                fb_user = fb_get_user_data(access_token, ['id', 'first_name', 'last_name', 'picture'])
                 fid = fb_user.get('id', False)
                 if fid:
-                    user = UserProfile.objects.filter(fid=fid)
-                response = {'countries': ['UA']}
+                    profile = UserProfile.objects.filter(fid=fid).first()
+                    if not profile:
+                        first_name = fb_user.get('first_name', 'John')
+                        last_name = fb_user.get('last_name', 'Doe')
+                        username = generate_username(first_name, last_name)
+                        password = User.objects.make_random_password()
+                        user = User.objects.create_user(username, username + '@gmail.com', password)
+                        user.first_name = first_name
+                        user.last_name = last_name
+                        profile = UserProfile(user=user)
+                        profile.fid = fid
+                        user.save()
+
+                    if countries:
+                        profile.visited_countries.clear()
+                    for cid in countries:
+                        country, created = Country.objects.get_or_create(cid=cid)
+                        profile.visited_countries.add(country)
+                    else:
+                        countries = [country.cid for country in profile.visited_countries.all()]
+
+                    profile.save()
+                response = {'countries': countries}
         except urllib2.URLError, e:
             response['error'] = e.code
 
