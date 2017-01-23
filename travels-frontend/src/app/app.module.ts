@@ -15,7 +15,7 @@ import { FirebaseloginComponent } from './firebaselogin/firebaselogin.component'
     AppComponent,
     MapComponent,
     FacebookloginComponent,
-    FirebaseloginComponent
+    //FirebaseloginComponent
   ],
   imports: [
     BrowserModule,

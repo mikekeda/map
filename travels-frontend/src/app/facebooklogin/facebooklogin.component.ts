@@ -10,6 +10,9 @@ declare var FB: any;
   styleUrls: ['./facebooklogin.component.css']
 })
 export class FacebookloginComponent {
+  access_token: string;
+  logged: boolean;
+
 
   constructor(private countriesService: CountriesService) {
     FB.init({
@@ -30,11 +33,15 @@ export class FacebookloginComponent {
 
   statusChangeCallback(resp) {
     if (resp.status === 'connected') {
-      this.countriesService.getVisitedCountries(resp.authResponse.accessToken);
+      this.access_token = resp.authResponse.accessToken;
+      this.logged = true;
+      this.countriesService.getVisitedCountries(this.access_token);
     }
     else if (resp.status === 'not_authorized') {
       FB.login((result: any) => {
-        this.countriesService.getVisitedCountries(result.authResponse.accessToken);
+        this.logged = false;
+        this.access_token = null;
+        this.countriesService.getVisitedCountries();
       });
     }
     else {

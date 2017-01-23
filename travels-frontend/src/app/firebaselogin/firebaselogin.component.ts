@@ -26,6 +26,11 @@ export class FirebaseloginComponent {
 
     // The start method will wait until the DOM is loaded.
     ui.start('#firebaseui-auth-container', {
+      callbacks: {
+        signInSuccess: function(currentUser, credential, redirectUrl) {
+          return false;
+        }
+      },
       signInSuccessUrl: '/',
       signInOptions: [
         // Leave the lines as is for the providers you want to offer your users.
@@ -38,7 +43,17 @@ export class FirebaseloginComponent {
     });
 
     firebase.auth().onAuthStateChanged(function(user) {
-      console.log(user);
+      if (user) {
+        user.getToken().then(function(accessToken) {
+            var displayName = user.displayName;
+            var email = user.email;
+            var emailVerified = user.emailVerified;
+            var photoURL = user.photoURL;
+            var uid = user.uid;
+            var providerData = user.providerData;
+          console.log(accessToken);
+        });
+      }
     });
   }
 }

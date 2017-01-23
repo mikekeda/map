@@ -19,3 +19,7 @@ class UserProfile(models.Model):
     visited_countries = models.ManyToManyField(Country, related_name='visitors')
     fid = models.PositiveIntegerField()
 
+    def __unicode__(self):
+        return u'%s' % (
+            self.user.username,
+        )

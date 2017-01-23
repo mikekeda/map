@@ -55,13 +55,12 @@ class ApiView(View):
         return response
 
     def post(self, request):
-        print request
         response = {'countries': ['FR']}
         try:
             json_data = json.loads(request.body)
             access_token = json_data.get('access_token')
-            countries = json_data.get('country_ids', [])
             if access_token:
+                countries = json_data.get('country_ids', None)
                 fb_user = fb_get_user_data(access_token, ['id', 'first_name', 'last_name', 'picture'])
                 fid = fb_user.get('id', False)
                 if fid:
@@ -76,17 +75,18 @@ class ApiView(View):
                         user.last_name = last_name
                         profile = UserProfile(user=user)
                         profile.fid = fid
+                        profile.save()
                         user.save()
 
-                    if countries:
+                    if countries is not None:
                         profile.visited_countries.clear()
-                    for cid in countries:
-                        country, created = Country.objects.get_or_create(cid=cid)
-                        profile.visited_countries.add(country)
+                        for cid in countries:
+                            country, created = Country.objects.get_or_create(cid=cid)
+                            profile.visited_countries.add(country)
+                        profile.save()
                     else:
                         countries = [country.cid for country in profile.visited_countries.all()]
 
-                    profile.save()
                 response = {'countries': countries}
         except urllib2.URLError, e:
             response['error'] = e.code
