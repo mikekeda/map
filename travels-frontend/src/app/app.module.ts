@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { CountriesService } from './countries.service';
 import { MapComponent } from './map/map.component';
 import { FacebookloginComponent } from './facebooklogin/facebooklogin.component';
+import { FirebaseloginComponent } from './firebaselogin/firebaselogin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
-    FacebookloginComponent
+    FacebookloginComponent,
+    FirebaseloginComponent
   ],
   imports: [
     BrowserModule,
