@@ -37,15 +37,12 @@ export class FacebookloginComponent {
       this.logged = true;
       this.countriesService.getVisitedCountries(this.access_token);
     }
-    else if (resp.status === 'not_authorized') {
+    else {
       FB.login((result: any) => {
         this.logged = false;
         this.access_token = null;
         this.countriesService.getVisitedCountries();
       });
-    }
-    else {
-
     }
   }
 }

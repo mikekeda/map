@@ -2,7 +2,7 @@ from django.http import JsonResponse, HttpResponse
 from django.views.generic import View
 import urllib2
 import json
-from travel.models import UserProfile, Country
+from travel.models import Profile, Country
 from django.contrib.auth.models import User
 
 
@@ -55,7 +55,7 @@ class ApiView(View):
         return response
 
     def post(self, request):
-        response = {'countries': ['FR']}
+        response = {'countries': []}
         try:
             json_data = json.loads(request.body)
             access_token = json_data.get('access_token')
@@ -64,7 +64,7 @@ class ApiView(View):
                 fb_user = fb_get_user_data(access_token, ['id', 'first_name', 'last_name', 'picture'])
                 fid = fb_user.get('id', False)
                 if fid:
-                    profile = UserProfile.objects.filter(fid=fid).first()
+                    profile = Profile.objects.filter(fid=fid).first()
                     if not profile:
                         first_name = fb_user.get('first_name', 'John')
                         last_name = fb_user.get('last_name', 'Doe')
@@ -73,7 +73,7 @@ class ApiView(View):
                         user = User.objects.create_user(username, username + '@gmail.com', password)
                         user.first_name = first_name
                         user.last_name = last_name
-                        profile = UserProfile(user=user)
+                        profile = Profile(user=user)
                         profile.fid = fid
                         profile.save()
                         user.save()
