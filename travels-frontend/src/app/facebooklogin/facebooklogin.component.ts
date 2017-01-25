@@ -10,8 +10,9 @@ declare var FB: any;
   styleUrls: ['./facebooklogin.component.css']
 })
 export class FacebookloginComponent {
-  access_token: string;
-  logged: boolean;
+  access_token: string = null;
+  btn_text: string = 'Sign in with Facebook';
+  logged: boolean = false;
 
 
   constructor(private countriesService: CountriesService) {
@@ -33,15 +34,25 @@ export class FacebookloginComponent {
 
   statusChangeCallback(resp) {
     if (resp.status === 'connected') {
-      this.access_token = resp.authResponse.accessToken;
-      this.logged = true;
-      this.countriesService.getVisitedCountries(this.access_token);
-    }
-    else {
-      FB.login((result: any) => {
+      if (this.logged) {
         this.logged = false;
+        this.btn_text =  'Sign in with Facebook';
         this.access_token = null;
         this.countriesService.getVisitedCountries();
+      }
+      else {
+        this.logged = true;
+        this.btn_text =  'Sign out with Facebook';
+        this.access_token = resp.authResponse.accessToken;
+        this.countriesService.getVisitedCountries(this.access_token);
+      }
+    }
+    else {
+      FB.login((resp) => {
+        this.logged = true;
+        this.btn_text =  'Sign out with Facebook';
+        this.access_token = resp.authResponse.accessToken;
+        this.countriesService.getVisitedCountries(this.access_token);
       });
     }
   }

@@ -43,12 +43,10 @@ export class CountriesService {
   }
 
   getVisitedCountries (access_token?: string) {
-    if (access_token) {
-      return this.http.post(this.countriesUrl, {'access_token': access_token}, this.headers)
-                      .map(this.extractData)
-                      .catch(this.handleError)
-                      .subscribe((countries: Array<string>) => this._visitedCountries.next(countries));
-    }
+    return this.http.post(this.countriesUrl, {'access_token': access_token}, this.headers)
+                    .map(this.extractData)
+                    .catch(this.handleError)
+                    .subscribe((countries: Array<string>) => this._visitedCountries.next(countries));
   }
 
   setVisitedCountries (country_ids: Object, access_token: string) {

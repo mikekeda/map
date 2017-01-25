@@ -61,7 +61,7 @@ class ApiView(View):
             access_token = json_data.get('access_token')
             if access_token:
                 countries = json_data.get('country_ids', None)
-                fb_user = fb_get_user_data(access_token, ['id', 'first_name', 'last_name', 'picture'])
+                fb_user = fb_get_user_data(access_token, ['id', 'first_name', 'last_name', 'picture', 'email'])
                 fid = fb_user.get('id', False)
                 if fid:
                     profile = Profile.objects.filter(fid=fid).first()
@@ -69,8 +69,9 @@ class ApiView(View):
                         first_name = fb_user.get('first_name', 'John')
                         last_name = fb_user.get('last_name', 'Doe')
                         username = generate_username(first_name, last_name)
+                        email = fb_user.get('email')
                         password = User.objects.make_random_password()
-                        user = User.objects.create_user(username, username + '@gmail.com', password)
+                        user = User.objects.create_user(username, email, password)
                         user.first_name = first_name
                         user.last_name = last_name
                         profile = Profile(user=user)
