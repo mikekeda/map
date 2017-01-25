@@ -7,7 +7,7 @@ declare var FB: any;
 @Component({
   selector: 'app-facebooklogin',
   templateUrl: './facebooklogin.component.html',
-  styleUrls: ['./facebooklogin.component.css']
+  styleUrls: ['./facebooklogin.component.scss']
 })
 export class FacebookloginComponent {
   access_token: string = null;
@@ -49,10 +49,15 @@ export class FacebookloginComponent {
     }
     else {
       FB.login((resp) => {
-        this.logged = true;
-        this.btn_text =  'Sign out with Facebook';
-        this.access_token = resp.authResponse.accessToken;
-        this.countriesService.getVisitedCountries(this.access_token);
+        if (resp.authResponse) {
+          this.logged = true;
+          this.btn_text =  'Sign out with Facebook';
+          this.access_token = resp.authResponse.accessToken;
+          this.countriesService.getVisitedCountries(this.access_token);
+        }
+        else {
+          console.log('User cancelled login or did not fully authorize.');
+        }
       });
     }
   }

@@ -1,9 +1,13 @@
-path {
-    fill: #aaa;
-    &:hover {
-        fill: #777;
-    }
-    &.visited {
-        fill: #555;
-    }
+svg {
+  max-height: calc(100vh - 100px);
+  max-width: 100vw;
+  path {
+      fill: #aaa;
+      &:hover {
+          fill: #777;
+      }
+      &.visited {
+          fill: #555;
+      }
+  }
 }
