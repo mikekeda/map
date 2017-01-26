@@ -13,6 +13,7 @@ export class FacebookloginComponent {
   access_token: string = null;
   btn_text: string = 'Sign in with Facebook';
   logged: boolean = false;
+  my_fid: number = 0;
 
 
   constructor(private countriesService: CountriesService) {
@@ -27,8 +28,8 @@ export class FacebookloginComponent {
   }
 
   onFacebookLoginClick() {
-    FB.getLoginStatus(response => {
-      this.statusChangeCallback(response);
+    FB.getLoginStatus(resp => {
+      this.statusChangeCallback(resp);
     });
   }
 
@@ -36,12 +37,14 @@ export class FacebookloginComponent {
     if (resp.status === 'connected') {
       if (this.logged) {
         this.logged = false;
+        this.my_fid = 0;
         this.btn_text =  'Sign in with Facebook';
         this.access_token = null;
-        this.countriesService.getVisitedCountries();
+        this.countriesService.getVisitedCountries(this.access_token);
       }
       else {
         this.logged = true;
+        this.my_fid = resp.authResponse.userID;
         this.btn_text =  'Sign out with Facebook';
         this.access_token = resp.authResponse.accessToken;
         this.countriesService.getVisitedCountries(this.access_token);
@@ -51,6 +54,7 @@ export class FacebookloginComponent {
       FB.login((resp) => {
         if (resp.authResponse) {
           this.logged = true;
+          this.my_fid = resp.authResponse.userID;
           this.btn_text =  'Sign out with Facebook';
           this.access_token = resp.authResponse.accessToken;
           this.countriesService.getVisitedCountries(this.access_token);

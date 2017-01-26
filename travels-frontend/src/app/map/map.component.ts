@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
+import { ActivatedRoute } from '@angular/router';
 
 import { Country } from '../country';
 import { CountriesService } from '../countries.service';
@@ -13,11 +14,12 @@ declare var FB: any;
 })
 export class MapComponent implements OnInit {
 
-  constructor(private countriesService: CountriesService) { }
+  constructor(private countriesService: CountriesService, private route: ActivatedRoute) { }
 
   subscription: Subscription;
   countries: Country[] = [];
   visitedCountries = [];
+  fid: number = 0;
   access_token: string;
   errorMessage: string;
 
@@ -25,7 +27,11 @@ export class MapComponent implements OnInit {
     this.countriesService.getCountries()
       .then(countries => this.countries = countries);
     this.subscription = this.countriesService.visitedCountries$
-      .subscribe(visitedCountries => this.visitedCountries = visitedCountries)
+      .subscribe(visitedCountries => this.visitedCountries = visitedCountries);
+    this.route.params.subscribe(params => {
+      this.fid = +params['fid'];
+      this.countriesService.getVisitedCountries('', this.fid);
+    });
   }
 
   selectCountry(country): void {

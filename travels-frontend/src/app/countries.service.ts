@@ -42,8 +42,8 @@ export class CountriesService {
     return Promise.resolve(COUNTRIES);
   }
 
-  getVisitedCountries (access_token?: string) {
-    return this.http.post(this.countriesUrl, {'access_token': access_token}, this.headers)
+  getVisitedCountries (access_token?: string, fid?: number) {
+    return this.http.post(this.countriesUrl, {'access_token': access_token, 'fid': fid}, this.headers)
                     .map(this.extractData)
                     .catch(this.handleError)
                     .subscribe((countries: Array<string>) => this._visitedCountries.next(countries));
