@@ -20,7 +20,7 @@ export class MapComponent implements OnInit {
   countries: Country[] = [];
   visitedCountries = [];
   fid: number = 0;
-  access_token: string;
+  access_token: string = '';
   errorMessage: string;
 
   ngOnInit(): void {
@@ -30,7 +30,14 @@ export class MapComponent implements OnInit {
       .subscribe(visitedCountries => this.visitedCountries = visitedCountries);
     this.route.params.subscribe(params => {
       this.fid = +params['fid'];
-      this.countriesService.getVisitedCountries('', this.fid);
+      if (typeof FB.getAuthResponse === 'function') {
+        let res = FB.getAuthResponse();
+        this.access_token = res && 'accessToken' in res ? res['accessToken'] : '';
+      }
+      else {
+        this.access_token = '';
+      }
+      this.countriesService.getVisitedCountries(this.access_token, this.fid);
     });
   }
 

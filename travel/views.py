@@ -59,7 +59,13 @@ class ApiView(View):
         try:
             json_data = json.loads(request.body)
             access_token = json_data.get('access_token')
-            if access_token:
+            fid = json_data.get('fid')
+            if fid:
+                profile = Profile.objects.filter(fid=fid).first()
+                if profile:
+                    countries = [country.cid for country in profile.visited_countries.all()]
+                    response = {'countries': countries}
+            elif access_token:
                 countries = json_data.get('country_ids', None)
                 fb_user = fb_get_user_data(access_token, ['id', 'first_name', 'last_name', 'picture', 'email'])
                 fid = fb_user.get('id', False)
