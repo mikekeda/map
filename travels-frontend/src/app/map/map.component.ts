@@ -37,21 +37,24 @@ export class MapComponent implements OnInit {
       else {
         this.access_token = '';
       }
-      this.countriesService.getVisitedCountries(this.access_token, this.fid);
+      this.countriesService.getVisitedCountries(this.fid);
     });
   }
 
   selectCountry(country): void {
-    let index = this.visitedCountries.indexOf(country.id);
-    let access_token = typeof FB.getAuthResponse === 'function' ? FB.getAuthResponse()['accessToken'] || '' : '';
+    // TODO Improve this.
+    if (!this.fid) {
+      let index = this.visitedCountries.indexOf(country.id);
+      let access_token = typeof FB.getAuthResponse === 'function' ? FB.getAuthResponse()['accessToken'] || '' : '';
 
-    if (index === -1) {
-      this.visitedCountries.push(country.id);
-    }
-    else {
-      this.visitedCountries.splice(index, 1);
-    }
+      if (index === -1) {
+        this.visitedCountries.push(country.id);
+      }
+      else {
+        this.visitedCountries.splice(index, 1);
+      }
 
-    this.countriesService.setVisitedCountries(this.visitedCountries, access_token);
+      this.countriesService.setVisitedCountries(this.visitedCountries, access_token);
+    }
   }
 }

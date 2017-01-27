@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { CountriesService } from './countries.service';
+import { FbService } from './fb.service';
 import { MapComponent } from './map/map.component';
 import { FacebookloginComponent } from './facebooklogin/facebooklogin.component';
 // import { FirebaseloginComponent } from './firebaselogin/firebaselogin.component';
@@ -29,7 +30,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule
   ],
-  providers: [AUTH_PROVIDERS, CountriesService],
+  providers: [AUTH_PROVIDERS, CountriesService, FbService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

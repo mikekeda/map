@@ -31,13 +31,14 @@ def generate_username(first_name, last_name):
 class ApiView(View):
     def get(self, request):
         response = {'countries': []}
-        try:
-            access_token = request.POST.get('access_token', False)
-            if access_token:
-                fb_user = fb_get_user_data(access_token, ['id', 'name', 'picture'])
-                print fb_user
-        except urllib2.URLError, e:
-            response['error'] = e.code
+
+        fid = request.GET.get('fid', '')
+        if fid:
+            profile = Profile.objects.filter(fid=fid).first()
+            if profile:
+                countries = [country.cid for country in profile.visited_countries.all()]
+                response = {'countries': countries}
+
 
         #return JsonResponse(response)
         response = HttpResponse(json.dumps(response))

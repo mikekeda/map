@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
+import { Headers, Http, Response, RequestOptions, URLSearchParams } from '@angular/http';
 import { Country } from './country';
 import { COUNTRIES } from './countries';
 
@@ -42,8 +42,14 @@ export class CountriesService {
     return Promise.resolve(COUNTRIES);
   }
 
-  getVisitedCountries (access_token?: string, fid?: number) {
-    return this.http.post(this.countriesUrl, {'access_token': access_token, 'fid': fid}, this.headers)
+  getVisitedCountries (fid: number) {
+    let params = new URLSearchParams();
+    params.set('fid', fid.toString());
+    let options = new RequestOptions({
+        headers: this.headers,
+        search: fid ? params : ''
+    });
+    return this.http.get(this.countriesUrl, options)
                     .map(this.extractData)
                     .catch(this.handleError)
                     .subscribe((countries: Array<string>) => this._visitedCountries.next(countries));
