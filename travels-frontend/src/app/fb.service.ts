@@ -1,7 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Headers, Http, Response, RequestOptions, URLSearchParams } from '@angular/http';
-import { Country } from './country';
-import { COUNTRIES } from './countries';
+import { User } from './user';
 
 import { Observable }     from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -10,20 +9,16 @@ declare var FB: any;
 
 @Injectable()
 export class FbService {
-  access_token: number = 0;
-  logged: boolean = false;
-  my_fid: number = 0
+  user: User = new User(0, 0);
 
-  private _logged = new BehaviorSubject<boolean>(false);
-  logged$ = this._logged.asObservable();
-
-  private _fid = new BehaviorSubject<number>(0);
-  my_fid$ = this._fid.asObservable();
-
-  private _access_token = new BehaviorSubject<number>(0);
-  access_token$ = this._access_token.asObservable();
+  private _user = new BehaviorSubject<User>(new User(0, 0));
+  user$ = this._user.asObservable();
 
   constructor() { }
+
+  getUSer() {
+    return this.user;
+  }
 
   fbStatusChange() {
     FB.getLoginStatus(resp => {
@@ -33,23 +28,23 @@ export class FbService {
 
   statusChangeCallback(resp) {
     if (resp.status === 'connected') {
-      if (this.logged) {
-        this.logged = false;
-        this.my_fid = 0;
-        this.access_token = null;
+      if (this.user.fid !== 0) {
+        this.user.fid = 0;
+        this.user.access_token = 0;
+        this._user.next(this.user);
       }
       else {
-        this.logged = true;
-        this.my_fid = resp.authResponse.userID;
-        this.access_token = resp.authResponse.accessToken;
+        this.user.fid = resp.authResponse.userID;
+        this.user.access_token = resp.authResponse.accessToken;
+        this._user.next(this.user);
       }
     }
     else {
       FB.login((resp) => {
         if (resp.authResponse) {
-          this.logged = true;
-          this.my_fid = resp.authResponse.userID;
-          this.access_token = resp.authResponse.accessToken;
+          this.user.fid = resp.authResponse.userID;
+          this.user.access_token = resp.authResponse.accessToken;
+          this._user.next(this.user);
         }
         else {
           console.log('User cancelled login or did not fully authorize.');

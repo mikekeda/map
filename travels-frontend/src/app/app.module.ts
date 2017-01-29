@@ -14,7 +14,7 @@ import { FacebookloginComponent } from './facebooklogin/facebooklogin.component'
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', component: MapComponent },
-  { path: 'user/:fid',      component: MapComponent },
+  { path: 'user/:fid', component: MapComponent },
 ];
 
 @NgModule({

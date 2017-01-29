@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
 
 import { Country } from '../country';
 import { CountriesService } from '../countries.service';
+import { FbService } from '../fb.service';
 
 declare var FB: any;
 
@@ -12,9 +13,9 @@ declare var FB: any;
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnDestroy {
 
-  constructor(private countriesService: CountriesService, private route: ActivatedRoute) { }
+  constructor(private countriesService: CountriesService, private fbService: FbService, private route: ActivatedRoute) { }
 
   subscription: Subscription;
   countries: Country[] = [];
@@ -23,22 +24,24 @@ export class MapComponent implements OnInit {
   access_token: string = '';
   errorMessage: string;
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.countriesService.getCountries()
       .then(countries => this.countries = countries);
     this.subscription = this.countriesService.visitedCountries$
       .subscribe(visitedCountries => this.visitedCountries = visitedCountries);
     this.route.params.subscribe(params => {
       this.fid = +params['fid'];
-      if (typeof FB.getAuthResponse === 'function') {
-        let res = FB.getAuthResponse();
-        this.access_token = res && 'accessToken' in res ? res['accessToken'] : '';
-      }
-      else {
-        this.access_token = '';
+      if (isNaN(this.fid)) {
+        let user = this.fbService.getUSer();
+
+        this.fid = user.fid;
       }
       this.countriesService.getVisitedCountries(this.fid);
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   selectCountry(country): void {
