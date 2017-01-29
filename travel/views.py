@@ -1,6 +1,7 @@
 from django.http import JsonResponse, HttpResponse
 from django.views.generic import View
-import urllib2
+from urllib.request import urlopen
+import urllib.error
 import json
 from travel.models import Profile, Country
 from django.contrib.auth.models import User
@@ -9,8 +10,8 @@ from django.contrib.auth.models import User
 def fb_get_user_data(access_token, fields):
     fields = '%2C'.join(fields)
     url = 'https://graph.facebook.com/v2.8/me?fields={0}&access_token={1}'.format(fields, access_token)
-    req = urllib2.urlopen(url)
-    return json.loads(req.read())
+    req = urlopen(url)
+    return json.loads(req.read().decode('utf-8'))
 
 
 def generate_username(first_name, last_name):
@@ -58,7 +59,7 @@ class ApiView(View):
     def post(self, request):
         response = {'countries': []}
         try:
-            json_data = json.loads(request.body)
+            json_data = json.loads(request.body.decode('utf-8'))
             access_token = json_data.get('access_token')
             fid = json_data.get('fid')
             if fid:
@@ -96,7 +97,7 @@ class ApiView(View):
                         countries = [country.cid for country in profile.visited_countries.all()]
 
                 response = {'countries': countries}
-        except urllib2.URLError, e:
+        except urllib.error.URLError as e:
             response['error'] = e.code
 
         #return JsonResponse(response)

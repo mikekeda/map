@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -30,7 +29,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule
   ],
-  providers: [AUTH_PROVIDERS, CountriesService, FbService],
+  providers: [CountriesService, FbService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
