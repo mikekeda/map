@@ -7,8 +7,9 @@ from django.contrib.auth.models import User
 class Country(models.Model):
     """Country model"""
     cid = models.CharField(max_length=3, unique=True)
+    name = models.CharField(max_length=60, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % (
             self.cid,
         )
@@ -19,7 +20,7 @@ class Profile(models.Model):
     visited_countries = models.ManyToManyField(Country, related_name='visitors')
     fid = models.PositiveIntegerField()
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % (
             self.user.username,
         )
