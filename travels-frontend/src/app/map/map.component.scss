@@ -5,12 +5,18 @@ svg {
   margin: 0 auto;
   display: block;
   path {
-      fill: #aaa;
+      fill: #ccc;
       &:hover {
           fill: #777;
       }
+      &.filtered {
+        fill: #aaa;
+      }
       &.visited {
           fill: #555;
+          &.filtered {
+            fill: #333;
+          }
       }
   }
 }

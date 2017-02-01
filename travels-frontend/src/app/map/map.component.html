@@ -13,6 +13,7 @@
 		</style>
 	</defs>
 	<g>
-	  <path *ngFor="let country of countries" (click)="selectCountry(country)" [ngClass]="{'visited': (visitedCountries.indexOf(country.id) !== -1) }" id="{{ country.id }}" title="{{ country.title }}" [attr.d]="country.d"/>
+	  <path *ngFor="let country of countries" (click)="selectCountry(country)" [ngClass]="{'visited': (visitedCountries.indexOf(country.id) !== -1), 'filtered': (country.title.indexOf(country_filter.value) !== -1) }" id="{{ country.id }}" title="{{ country.title }}" [attr.d]="country.d"/>
   </g>
 </svg>
+<input #country_filter (keyup)="0">
