@@ -1,9 +1,15 @@
+#main-menu {
+  float: right;
+  a {
+    padding: 3px 5px;
+    margin: 0 5px;
+    display: inline-block;
+  }
+}
 .btn-facebook {
-  position: absolute;
-  right: 20px;
-  top: 20px;
   background: linear-gradient(#4c69ba, #3b55a0);
   border: none;
+  float: right;
   font-size: .8rem;
   padding: 5px 10px;
   color: #fff;

@@ -6,17 +6,24 @@ svg {
   display: block;
   path {
       fill: #ccc;
-      &:hover {
-          fill: #777;
-      }
       &.filtered {
         fill: #aaa;
       }
-      &.visited {
+      &:hover {
           fill: #555;
+      }
+      &.visited {
+          fill: #777;
           &.filtered {
-            fill: #333;
+            fill: #555;
           }
       }
   }
+}
+
+#country_filter {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  padding: 2px 5px;
 }

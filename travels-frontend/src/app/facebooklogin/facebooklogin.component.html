@@ -1,6 +1,10 @@
 <div>
-	<a *ngIf="user.fid" routerLink="/u/{{ user.fid }}">My map</a>
-	<button class="btn btn-lg btn-social btn-facebook" (click)="onFacebookLoginClick()">
-	    <i class="fa fa-facebook fa-fw"></i>{{ btn_text }}
-	</button>
+	<div id="socials">
+		<button class="btn btn-lg btn-social btn-facebook" (click)="onFacebookLoginClick()">
+				<i class="fa fa-facebook fa-fw"></i>{{ btn_text }}
+		</button>
+	</div>
+	<nav id="main-menu">
+		<a *ngIf="user.fid" routerLink="/u/{{ user.fid }}">My map</a>
+	</nav>
 </div>
