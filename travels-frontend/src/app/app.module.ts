@@ -9,11 +9,13 @@ import { CountriesService } from './countries.service';
 import { FbService } from './fb.service';
 import { MapComponent } from './map/map.component';
 import { FacebookloginComponent } from './facebooklogin/facebooklogin.component';
+import { CompareComponent } from './compare/compare.component';
 // import { FirebaseloginComponent } from './firebaselogin/firebaselogin.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', component: MapComponent },
   { path: 'u/:fid', component: MapComponent },
+  { path: 'compare/:fid1/:fid2', component: CompareComponent },
 ];
 
 @NgModule({
@@ -21,6 +23,7 @@ const appRoutes: Routes = [
     AppComponent,
     MapComponent,
     FacebookloginComponent,
+    CompareComponent,
     //FirebaseloginComponent
   ],
   imports: [

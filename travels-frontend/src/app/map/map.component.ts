@@ -19,7 +19,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
   countries: Country[] = [];
-  visitedCountries = [];
+  visitedCountries: Array<string> = [];
   fid: number = 0;
   access_token: string = '';
   errorMessage: string;

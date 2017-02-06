@@ -1,6 +1,6 @@
 svg {
   min-height: 400px;
-  max-height: calc(100vh - 100px);
+  max-height: calc(100vh - 120px);
   max-width: 100vw;
   margin: 0 auto;
   display: block;
@@ -22,8 +22,5 @@ svg {
 }
 
 #country_filter {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
   padding: 2px 5px;
 }
