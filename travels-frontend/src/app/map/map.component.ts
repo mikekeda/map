@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
 
@@ -15,12 +15,13 @@ declare var FB: any;
 })
 export class MapComponent implements OnInit, OnDestroy {
 
+  @Input() fid: number = 0;
+
   constructor(private countriesService: CountriesService, private fbService: FbService, private route: ActivatedRoute) { }
 
   subscription: Subscription;
   countries: Country[] = [];
   visitedCountries: Array<string> = [];
-  fid: number = 0;
   access_token: string = '';
   errorMessage: string;
 
