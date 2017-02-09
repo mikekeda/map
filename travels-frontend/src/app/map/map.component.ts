@@ -31,11 +31,16 @@ export class MapComponent implements OnInit, OnDestroy {
     this.subscription = this.countriesService.visitedCountries$
       .subscribe(visitedCountries => this.visitedCountries = visitedCountries);
     this.route.params.subscribe(params => {
-      this.fid = +params['fid'];
-      if (isNaN(this.fid)) {
-        let user = this.fbService.getUSer();
+      let fid = +params['fid'];
+      if (isNaN(fid)) {
+        if (this.fid === 0) {
+          let user = this.fbService.getUSer();
 
-        this.fid = user.fid;
+          this.fid = user.fid;
+        }
+      }
+      else {
+        this.fid = fid;
       }
       this.countriesService.getVisitedCountries(this.fid);
     });
