@@ -9,9 +9,9 @@ declare var FB: any;
 
 @Injectable()
 export class FbService {
-  user: User = new User(0, 0);
+  user: User = new User();
 
-  private _user = new BehaviorSubject<User>(new User(0, 0));
+  private _user = new BehaviorSubject<User>(new User());
   user$ = this._user.asObservable();
 
   constructor() { }
@@ -30,11 +30,11 @@ export class FbService {
     if (resp.status === 'connected') {
       if (this.user.fid !== 0) {
         this.user.fid = 0;
-        this.user.access_token = 0;
+        this.user.access_token = '';
         this._user.next(this.user);
       }
       else {
-        this.user.fid = resp.authResponse.userID;
+        this.user.fid = Number(resp.authResponse.userID);
         this.user.access_token = resp.authResponse.accessToken;
         this._user.next(this.user);
       }
@@ -42,7 +42,7 @@ export class FbService {
     else {
       FB.login((resp) => {
         if (resp.authResponse) {
-          this.user.fid = resp.authResponse.userID;
+          this.user.fid = Number(resp.authResponse.userID);
           this.user.access_token = resp.authResponse.accessToken;
           this._user.next(this.user);
         }

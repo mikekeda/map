@@ -6,8 +6,6 @@ import { Country } from '../country';
 import { CountriesService } from '../countries.service';
 import { FbService } from '../fb.service';
 
-declare var FB: any;
-
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -31,7 +29,7 @@ export class MapComponent implements OnInit, OnDestroy {
     this.subscription = this.countriesService.visitedCountries$
       .subscribe(visitedCountries => this.visitedCountries = visitedCountries);
     this.route.params.subscribe(params => {
-      let fid = +params['fid'];
+      let fid = Number(params['fid']);
       if (isNaN(fid)) {
         if (this.fid === 0) {
           let user = this.fbService.getUSer();
@@ -51,10 +49,10 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   selectCountry(country): void {
-    // TODO Improve this.
-    if (!this.fid) {
+    let user = this.fbService.getUSer();
+
+    if (!this.fid || this.fid === user.fid) {
       let index = this.visitedCountries.indexOf(country.id);
-      let access_token = typeof FB.getAuthResponse === 'function' ? FB.getAuthResponse()['accessToken'] || '' : '';
 
       if (index === -1) {
         this.visitedCountries.push(country.id);
@@ -63,7 +61,7 @@ export class MapComponent implements OnInit, OnDestroy {
         this.visitedCountries.splice(index, 1);
       }
 
-      this.countriesService.setVisitedCountries(this.visitedCountries, access_token);
+      this.countriesService.setVisitedCountries(this.visitedCountries, user.access_token);
     }
   }
 }

@@ -6,8 +6,6 @@ import { COUNTRIES } from './countries';
 import { Observable }     from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-declare var FB: any;
-
 @Injectable()
 export class CountriesService {
   private headers = new Headers({'Content-Type': 'application/json'});
@@ -24,7 +22,6 @@ export class CountriesService {
   }
 
   private handleError (error: Response | any) {
-    // In a real world app, we might use a remote logging infrastructure
     let errMsg: string;
     if (error instanceof Response) {
       const body = error.json() || '';
