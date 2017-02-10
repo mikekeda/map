@@ -24,6 +24,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 ]
 
-if settings.DEBUG:
-    urlpatterns += url(
-        r'^(?:index.html)?$', staticfiles.views.serve, kwargs={'path': 'index.html'}),
+# if settings.DEBUG:
+#     urlpatterns += url(
+#         r'^(?:index.html)?$', staticfiles.views.serve, kwargs={'path': 'index.html'}),
