@@ -40,7 +40,7 @@ class ApiView(View):
             except ObjectDoesNotExist:
                 pass
 
-        #return JsonResponse(response)
+        # return JsonResponse(response)
         response = HttpResponse(json.dumps(response))
         response["Access-Control-Allow-Origin"] = "http://localhost:4200"
         response["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
@@ -69,6 +69,7 @@ class ApiView(View):
                 except ObjectDoesNotExist:
                     pass
             elif access_token:
+                countries = []
                 fb_user = fb_get_user_data(access_token, ['id', 'first_name', 'last_name', 'picture', 'email'])
                 fid = fb_user.get('id')
                 if fid:
@@ -99,14 +100,13 @@ class ApiView(View):
                                 profile.visited_countries.add(country)
                             except ObjectDoesNotExist:
                                 pass
-                        profile.save()
                     countries = [country.cid for country in profile.visited_countries.all()]
 
                 response = {'countries': countries}
         except urllib.error.URLError as e:
             response['error'] = e.code
 
-        #return JsonResponse(response)
+        # return JsonResponse(response)
         response = HttpResponse(json.dumps(response))
         response["Access-Control-Allow-Origin"] = "http://localhost:4200"
         response["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
