@@ -40,7 +40,7 @@ class Country(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     visited_countries = models.ManyToManyField(Country, related_name='visitors')
-    fid = models.PositiveIntegerField()
+    fid = models.BigIntegerField()
 
     def __str__(self):
         return u'%s' % (

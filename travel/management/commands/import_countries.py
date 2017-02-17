@@ -10,7 +10,7 @@ class Command(BaseCommand):
     help = "Import countries from countries list in Angular2"
 
     def handle(self, *args, **options):
-        file_name = 'travels-frontend/src/app/countries.ts'
+        file_name = 'frontend/src/app/countries.ts'
         self.stdout.write("Started countries import")
 
         with open(file_name) as f:
