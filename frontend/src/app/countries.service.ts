@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 export class CountriesService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private countriesUrl = 'http://localhost:8000/api/countries';
+  private countriesUrl = 'http://localhost/api/countries';
 
   private _visitedCountries = new BehaviorSubject<Array<string>>([]);
   visitedCountries$ = this._visitedCountries.asObservable();

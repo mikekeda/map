@@ -30,7 +30,7 @@ var CountriesService = (function () {
     function CountriesService(http) {
         this.http = http;
         this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
-        this.countriesUrl = 'http://localhost:8000/api/countries';
+        this.countriesUrl = 'http://localhost/api/countries';
         this._visitedCountries = new __WEBPACK_IMPORTED_MODULE_4_rxjs_BehaviorSubject__["BehaviorSubject"]([]);
         this.visitedCountries$ = this._visitedCountries.asObservable();
     }
