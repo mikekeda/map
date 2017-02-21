@@ -42,14 +42,14 @@ class ApiView(View):
 
         # return JsonResponse(response)
         response = HttpResponse(json.dumps(response))
-        response["Access-Control-Allow-Origin"] = "http://localhost:8000"
+        response["Access-Control-Allow-Origin"] = "http://localhost:4200"
         response["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
         return response
 
     def options(self, request):
         response = HttpResponse()
         response['allow'] = "GET, POST, OPTIONS"
-        response['Access-Control-Allow-Origin'] = "http://localhost:8000"
+        response['Access-Control-Allow-Origin'] = "http://localhost:4200"
         response['Access-Control-Allow-Methods'] = "GET, POST, OPTIONS"
         response['Access-Control-Allow-Headers'] = "content-type"
         response['Access-Control-Max-Age'] = "1800"
@@ -108,7 +108,7 @@ class ApiView(View):
 
         # return JsonResponse(response)
         response = HttpResponse(json.dumps(response))
-        response["Access-Control-Allow-Origin"] = "http://localhost:8000"
+        response["Access-Control-Allow-Origin"] = "http://localhost:4200"
         response["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
         response["Access-Control-Allow-Headers"] = "content-type"
         response['Access-Control-Max-Age'] = "1800"
