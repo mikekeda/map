@@ -21,11 +21,7 @@ export class FacebookloginComponent implements OnInit {
     // TODO move this to fb service.
     FB.init({
       appId      : '674727196042358',
-      cookie     : false,  // enable cookies to allow the server to access
-                           // the session
-      xfbml      : true,   // parse social plugins on this page
       version    : 'v2.8', // use graph api version 2.8
-      status     : true
     });
   }
 

@@ -5,8 +5,8 @@ webpackJsonp([0,3],{
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(312);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__countries__ = __webpack_require__(508);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(311);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__countries__ = __webpack_require__(509);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_BehaviorSubject__ = __webpack_require__(110);
@@ -30,7 +30,7 @@ var CountriesService = (function () {
     function CountriesService(http) {
         this.http = http;
         this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
-        this.countriesUrl = '/api/countries';
+        this.countriesUrl = window.location.hostname == 'localhost' ? 'http://localhost:8000/api/countries' : '/api/countries';
         this._visitedCountries = new __WEBPACK_IMPORTED_MODULE_4_rxjs_BehaviorSubject__["BehaviorSubject"]([]);
         this.visitedCountries$ = this._visitedCountries.asObservable();
     }
@@ -82,7 +82,7 @@ CountriesService = __decorate([
 ], CountriesService);
 
 var _a;
-//# sourceMappingURL=/home/voron/dev/django/docker-travels/app/frontend/src/countries.service.js.map
+//# sourceMappingURL=/home/voron/dev/django/map/frontend/src/countries.service.js.map
 
 /***/ },
 
@@ -91,7 +91,7 @@ var _a;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user__ = __webpack_require__(336);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user__ = __webpack_require__(335);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_BehaviorSubject__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_BehaviorSubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_BehaviorSubject__);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FbService; });
@@ -156,16 +156,16 @@ FbService = __decorate([
     __metadata("design:paramtypes", [])
 ], FbService);
 
-//# sourceMappingURL=/home/voron/dev/django/docker-travels/app/frontend/src/fb.service.js.map
+//# sourceMappingURL=/home/voron/dev/django/map/frontend/src/fb.service.js.map
 
 /***/ },
 
-/***/ 335:
+/***/ 334:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rxjs_operators__ = __webpack_require__(512);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rxjs_operators__ = __webpack_require__(513);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rxjs_operators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__rxjs_operators__);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return AppComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -185,16 +185,16 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* Component */])({
         selector: 'app-root',
-        template: __webpack_require__(672),
-        styles: [__webpack_require__(668)]
+        template: __webpack_require__(673),
+        styles: [__webpack_require__(669)]
     })
 ], AppComponent);
 
-//# sourceMappingURL=/home/voron/dev/django/docker-travels/app/frontend/src/app.component.js.map
+//# sourceMappingURL=/home/voron/dev/django/map/frontend/src/app.component.js.map
 
 /***/ },
 
-/***/ 336:
+/***/ 335:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -211,11 +211,11 @@ var User = (function () {
     return User;
 }());
 
-//# sourceMappingURL=/home/voron/dev/django/docker-travels/app/frontend/src/user.js.map
+//# sourceMappingURL=/home/voron/dev/django/map/frontend/src/user.js.map
 
 /***/ },
 
-/***/ 389:
+/***/ 390:
 /***/ function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -224,21 +224,21 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 389;
+webpackEmptyContext.id = 390;
 
 
 /***/ },
 
-/***/ 390:
+/***/ 391:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__polyfills_ts__ = __webpack_require__(514);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__polyfills_ts__ = __webpack_require__(515);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__polyfills_ts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__polyfills_ts__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(476);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(477);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(513);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app___ = __webpack_require__(510);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(514);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app___ = __webpack_require__(511);
 
 
 
@@ -248,25 +248,25 @@ if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment *
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__angular_core__["_40" /* enableProdMode */])();
 }
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_4__app___["a" /* AppModule */]);
-//# sourceMappingURL=/home/voron/dev/django/docker-travels/app/frontend/src/main.js.map
+//# sourceMappingURL=/home/voron/dev/django/map/frontend/src/main.js.map
 
 /***/ },
 
-/***/ 506:
+/***/ 507:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(149);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(467);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(312);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(468);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(311);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(216);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(335);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(334);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__countries_service__ = __webpack_require__(220);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__fb_service__ = __webpack_require__(221);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__map_map_component__ = __webpack_require__(511);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__facebooklogin_facebooklogin_component__ = __webpack_require__(509);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__compare_compare_component__ = __webpack_require__(507);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__map_map_component__ = __webpack_require__(512);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__facebooklogin_facebooklogin_component__ = __webpack_require__(510);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__compare_compare_component__ = __webpack_require__(508);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -315,11 +315,11 @@ AppModule = __decorate([
     })
 ], AppModule);
 
-//# sourceMappingURL=/home/voron/dev/django/docker-travels/app/frontend/src/app.module.js.map
+//# sourceMappingURL=/home/voron/dev/django/map/frontend/src/app.module.js.map
 
 /***/ },
 
-/***/ 507:
+/***/ 508:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -356,18 +356,18 @@ var CompareComponent = (function () {
 CompareComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* Component */])({
         selector: 'compare-map',
-        template: __webpack_require__(673),
-        styles: [__webpack_require__(669)]
+        template: __webpack_require__(674),
+        styles: [__webpack_require__(670)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _a || Object])
 ], CompareComponent);
 
 var _a;
-//# sourceMappingURL=/home/voron/dev/django/docker-travels/app/frontend/src/compare.component.js.map
+//# sourceMappingURL=/home/voron/dev/django/map/frontend/src/compare.component.js.map
 
 /***/ },
 
-/***/ 508:
+/***/ 509:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -550,16 +550,16 @@ var COUNTRIES = [
     { id: "ZM", title: "Zambia", d: "M567.11,489.21L568.43,490.47L569.14,492.87L568.66,493.64L568.1,495.94L568.64,498.3L567.76,499.29L566.91,501.95L568.38,502.69L559.87,505.07L560.14,507.12L558.01,507.52L556.42,508.67L556.08,509.68L555.07,509.9L552.63,512.3L551.08,514.19L550.13,514.26L549.22,513.92L546.09,513.6L545.59,513.38L545.56,513.14L544.46,512.48L542.64,512.31L540.34,512.98L538.51,511.16L536.62,508.78L536.75,499.62L542.59,499.66L542.35,498.67L542.77,497.6L542.28,496.27L542.6,494.89L542.3,494.01L543.27,494.08L543.43,494.96L544.74,494.89L546.52,495.15L547.46,496.44L549.7,496.84L551.42,495.94L552.05,497.43L554.2,497.83L555.23,499.05L556.38,500.62L558.53,500.65L558.29,497.57L557.52,498.08L555.56,496.98L554.8,496.47L555.15,493.62L555.65,490.27L555.02,489.02L555.82,487.22L556.57,486.89L560.34,486.41L561.44,486.7L562.61,487.41L563.73,487.89L565.51,488.36z" },
     { id: "ZW", title: "Zimbabwe", d: "M562.71,527L561.22,526.7L560.27,527.06L558.92,526.55L557.78,526.52L555.99,525.16L553.82,524.7L553,522.8L552.99,521.75L551.79,521.43L548.62,518.18L547.73,516.47L547.17,515.95L546.09,513.6L549.22,513.92L550.13,514.26L551.08,514.19L552.63,512.3L555.07,509.9L556.08,509.68L556.42,508.67L558.01,507.52L560.14,507.12L560.32,508.2L562.66,508.14L563.96,508.75L564.56,509.47L565.9,509.68L567.35,510.62L567.36,514.31L566.81,516.35L566.69,518.55L567.14,519.43L566.83,521.17L566.4,521.44L565.66,523.59z" }
 ];
-//# sourceMappingURL=/home/voron/dev/django/docker-travels/app/frontend/src/countries.js.map
+//# sourceMappingURL=/home/voron/dev/django/map/frontend/src/countries.js.map
 
 /***/ },
 
-/***/ 509:
+/***/ 510:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user__ = __webpack_require__(336);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user__ = __webpack_require__(335);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__countries_service__ = __webpack_require__(220);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__fb_service__ = __webpack_require__(221);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FacebookloginComponent; });
@@ -585,11 +585,7 @@ var FacebookloginComponent = (function () {
         // TODO move this to fb service.
         FB.init({
             appId: '674727196042358',
-            cookie: false,
-            // the session
-            xfbml: true,
             version: 'v2.8',
-            status: true
         });
     }
     FacebookloginComponent.prototype.ngOnInit = function () {
@@ -613,32 +609,32 @@ var FacebookloginComponent = (function () {
 FacebookloginComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* Component */])({
         selector: 'app-facebooklogin',
-        template: __webpack_require__(674),
-        styles: [__webpack_require__(670)]
+        template: __webpack_require__(675),
+        styles: [__webpack_require__(671)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__countries_service__["a" /* CountriesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__countries_service__["a" /* CountriesService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__fb_service__["a" /* FbService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__fb_service__["a" /* FbService */]) === "function" && _b || Object])
 ], FacebookloginComponent);
 
 var _a, _b;
-//# sourceMappingURL=/home/voron/dev/django/docker-travels/app/frontend/src/facebooklogin.component.js.map
-
-/***/ },
-
-/***/ 510:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_component__ = __webpack_require__(335);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(506);
-/* unused harmony namespace reexport */
-/* harmony namespace reexport (by used) */ __webpack_require__.d(exports, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__app_module__["a"]; });
-
-
-//# sourceMappingURL=/home/voron/dev/django/docker-travels/app/frontend/src/index.js.map
+//# sourceMappingURL=/home/voron/dev/django/map/frontend/src/facebooklogin.component.js.map
 
 /***/ },
 
 /***/ 511:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_component__ = __webpack_require__(334);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(507);
+/* unused harmony namespace reexport */
+/* harmony namespace reexport (by used) */ __webpack_require__.d(exports, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__app_module__["a"]; });
+
+
+//# sourceMappingURL=/home/voron/dev/django/map/frontend/src/index.js.map
+
+/***/ },
+
+/***/ 512:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -715,34 +711,34 @@ __decorate([
 MapComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* Component */])({
         selector: 'app-map',
-        template: __webpack_require__(675),
-        styles: [__webpack_require__(671)]
+        template: __webpack_require__(676),
+        styles: [__webpack_require__(672)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__countries_service__["a" /* CountriesService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__countries_service__["a" /* CountriesService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__fb_service__["a" /* FbService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__fb_service__["a" /* FbService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object])
 ], MapComponent);
 
 var _a, _b, _c;
-//# sourceMappingURL=/home/voron/dev/django/docker-travels/app/frontend/src/map.component.js.map
+//# sourceMappingURL=/home/voron/dev/django/map/frontend/src/map.component.js.map
 
 /***/ },
 
-/***/ 512:
+/***/ 513:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_add_observable_throw__ = __webpack_require__(680);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_add_observable_throw__ = __webpack_require__(681);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_add_observable_throw___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_rxjs_add_observable_throw__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_catch__ = __webpack_require__(681);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_catch__ = __webpack_require__(682);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_catch__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_debounceTime__ = __webpack_require__(682);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_debounceTime__ = __webpack_require__(683);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_debounceTime___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_debounceTime__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_distinctUntilChanged__ = __webpack_require__(683);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_distinctUntilChanged__ = __webpack_require__(684);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_distinctUntilChanged___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_distinctUntilChanged__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__ = __webpack_require__(684);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__ = __webpack_require__(685);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_switchMap__ = __webpack_require__(685);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_switchMap__ = __webpack_require__(686);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_switchMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_switchMap__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_toPromise__ = __webpack_require__(686);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_toPromise__ = __webpack_require__(687);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_toPromise__);
 // Statics
 
@@ -753,11 +749,11 @@ var _a, _b, _c;
 
 
 
-//# sourceMappingURL=/home/voron/dev/django/docker-travels/app/frontend/src/rxjs-operators.js.map
+//# sourceMappingURL=/home/voron/dev/django/map/frontend/src/rxjs-operators.js.map
 
 /***/ },
 
-/***/ 513:
+/***/ 514:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -771,45 +767,45 @@ var environment = {
     production: false,
     "output-path": "../static/"
 };
-//# sourceMappingURL=/home/voron/dev/django/docker-travels/app/frontend/src/environment.js.map
+//# sourceMappingURL=/home/voron/dev/django/map/frontend/src/environment.js.map
 
 /***/ },
 
-/***/ 514:
+/***/ 515:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_core_js_es6_symbol__ = __webpack_require__(528);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_core_js_es6_symbol__ = __webpack_require__(529);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_core_js_es6_symbol___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_core_js_es6_symbol__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_core_js_es6_object__ = __webpack_require__(521);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_core_js_es6_object__ = __webpack_require__(522);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_core_js_es6_object___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_core_js_es6_object__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_core_js_es6_function__ = __webpack_require__(517);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_core_js_es6_function__ = __webpack_require__(518);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_core_js_es6_function___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_core_js_es6_function__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_core_js_es6_parse_int__ = __webpack_require__(523);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_core_js_es6_parse_int__ = __webpack_require__(524);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_core_js_es6_parse_int___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_core_js_es6_parse_int__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_core_js_es6_parse_float__ = __webpack_require__(522);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_core_js_es6_parse_float__ = __webpack_require__(523);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_core_js_es6_parse_float___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_core_js_es6_parse_float__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_core_js_es6_number__ = __webpack_require__(520);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_core_js_es6_number__ = __webpack_require__(521);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_core_js_es6_number___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_core_js_es6_number__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_core_js_es6_math__ = __webpack_require__(519);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_core_js_es6_math__ = __webpack_require__(520);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_core_js_es6_math___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_core_js_es6_math__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_core_js_es6_string__ = __webpack_require__(527);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_core_js_es6_string__ = __webpack_require__(528);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_core_js_es6_string___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_core_js_es6_string__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_core_js_es6_date__ = __webpack_require__(516);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_core_js_es6_date__ = __webpack_require__(517);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_core_js_es6_date___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_core_js_es6_date__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_core_js_es6_array__ = __webpack_require__(515);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_core_js_es6_array__ = __webpack_require__(516);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_core_js_es6_array___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_core_js_es6_array__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_core_js_es6_regexp__ = __webpack_require__(525);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_core_js_es6_regexp__ = __webpack_require__(526);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_core_js_es6_regexp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_core_js_es6_regexp__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_core_js_es6_map__ = __webpack_require__(518);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_core_js_es6_map__ = __webpack_require__(519);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_core_js_es6_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_core_js_es6_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_core_js_es6_set__ = __webpack_require__(526);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_core_js_es6_set__ = __webpack_require__(527);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_core_js_es6_set___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_core_js_es6_set__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect__ = __webpack_require__(524);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect__ = __webpack_require__(525);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect__ = __webpack_require__(529);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect__ = __webpack_require__(530);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__ = __webpack_require__(707);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__ = __webpack_require__(708);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__);
 // This file includes polyfills needed by Angular 2 and is loaded before
 // the app. You can add your own extra polyfills to this file.
@@ -829,73 +825,73 @@ var environment = {
 
 
 
-//# sourceMappingURL=/home/voron/dev/django/docker-travels/app/frontend/src/polyfills.js.map
-
-/***/ },
-
-/***/ 668:
-/***/ function(module, exports) {
-
-module.exports = "#logo {\n  display: inline-block;\n  float: left;\n  padding: 0 15px;\n  color: #333;\n  text-decoration: none;\n  text-transform: uppercase; }\n"
+//# sourceMappingURL=/home/voron/dev/django/map/frontend/src/polyfills.js.map
 
 /***/ },
 
 /***/ 669:
 /***/ function(module, exports) {
 
-module.exports = "#compare {\n  float: left;\n  width: 100%; }\n\n.col-6 {\n  float: left;\n  box-sizing: border-box;\n  padding: 0 30px;\n  width: 50%; }\n"
+module.exports = "#logo {\n  display: inline-block;\n  float: left;\n  padding: 0 15px;\n  color: #333;\n  text-decoration: none;\n  text-transform: uppercase; }\n"
 
 /***/ },
 
 /***/ 670:
 /***/ function(module, exports) {
 
-module.exports = "#main-menu {\n  float: right; }\n  #main-menu a {\n    padding: 3px 5px;\n    margin: 0 5px;\n    display: inline-block; }\n\n.btn-facebook {\n  background: -webkit-linear-gradient(#4c69ba, #3b55a0);\n  background: linear-gradient(#4c69ba, #3b55a0);\n  border: none;\n  float: right;\n  font-size: .8rem;\n  padding: 5px 10px;\n  color: #fff; }\n"
+module.exports = "#compare {\n  float: left;\n  width: 100%; }\n\n.col-6 {\n  float: left;\n  box-sizing: border-box;\n  padding: 0 30px;\n  width: 50%; }\n"
 
 /***/ },
 
 /***/ 671:
 /***/ function(module, exports) {
 
-module.exports = "svg {\n  display: block;\n  margin: 0 auto;\n  min-height: 400px;\n  max-width: 100vw;\n  max-height: calc(100vh - 120px); }\n  svg path {\n    fill: #ccc; }\n    svg path.filtered {\n      fill: #aaa; }\n    svg path:hover {\n      fill: #555; }\n    svg path.visited {\n      fill: #777; }\n      svg path.visited.filtered {\n        fill: #555; }\n\n#country_filter {\n  padding: 2px 5px; }\n"
+module.exports = "#main-menu {\n  float: right; }\n  #main-menu a {\n    padding: 3px 5px;\n    margin: 0 5px;\n    display: inline-block; }\n\n.btn-facebook {\n  cursor: pointer;\n  background: -webkit-linear-gradient(#4c69ba, #3b55a0);\n  background: linear-gradient(#4c69ba, #3b55a0);\n  border: none;\n  float: right;\n  font-size: .8rem;\n  padding: 5px 10px;\n  color: #fff; }\n"
 
 /***/ },
 
 /***/ 672:
 /***/ function(module, exports) {
 
-module.exports = "<a id=\"logo\" routerLink=\"\"><h1>{{ title }}</h1></a>\n<app-facebooklogin></app-facebooklogin>\n<!--<app-firebaselogin></app-firebaselogin>-->\n<router-outlet></router-outlet>\n"
+module.exports = "svg {\n  display: block;\n  margin: 0 auto;\n  min-height: 400px;\n  max-width: 100vw;\n  max-height: calc(100vh - 120px); }\n  svg path {\n    fill: #ccc; }\n    svg path.filtered {\n      fill: #aaa; }\n    svg path:hover {\n      fill: #555; }\n    svg path.visited {\n      fill: #777; }\n      svg path.visited.filtered {\n        fill: #555; }\n\n#country_filter {\n  padding: 2px 5px; }\n"
 
 /***/ },
 
 /***/ 673:
 /***/ function(module, exports) {
 
-module.exports = "<div id=\"compare\">\n  <div class=\"col-6\">\n    <app-map [fid]=\"1295742607131332\"></app-map>\n  </div>\n  <div class=\"col-6\">\n    <app-map [fid]=\"1295742607131332\"></app-map>\n  </div>\n</div>\n"
+module.exports = "<a id=\"logo\" routerLink=\"\"><h1>{{ title }}</h1></a>\n<app-facebooklogin></app-facebooklogin>\n<!--<app-firebaselogin></app-firebaselogin>-->\n<router-outlet></router-outlet>\n"
 
 /***/ },
 
 /***/ 674:
 /***/ function(module, exports) {
 
-module.exports = "<div>\n\t<div id=\"socials\">\n\t\t<button class=\"btn btn-lg btn-social btn-facebook\" (click)=\"onFacebookLoginClick()\">\n\t\t\t\t<i class=\"fa fa-facebook fa-fw\"></i>{{ btn_text }}\n\t\t</button>\n\t</div>\n\t<nav id=\"main-menu\">\n\t\t<a *ngIf=\"user.fid\" routerLink=\"/u/{{ user.fid }}\">My map</a>\n\t</nav>\n</div>\n"
+module.exports = "<div id=\"compare\">\n  <div class=\"col-6\">\n    <app-map [fid]=\"1295742607131332\"></app-map>\n  </div>\n  <div class=\"col-6\">\n    <app-map [fid]=\"1295742607131332\"></app-map>\n  </div>\n</div>\n"
 
 /***/ },
 
 /***/ 675:
 /***/ function(module, exports) {
 
+module.exports = "<div>\n\t<div id=\"socials\">\n\t\t<button class=\"btn btn-lg btn-social btn-facebook\" (click)=\"onFacebookLoginClick()\">\n\t\t\t\t<i class=\"fa fa-facebook fa-fw\"></i>{{ btn_text }}\n\t\t</button>\n\t</div>\n\t<nav id=\"main-menu\">\n\t\t<a *ngIf=\"user.fid\" routerLink=\"/u/{{ user.fid }}\">My map</a>\n\t</nav>\n</div>\n"
+
+/***/ },
+
+/***/ 676:
+/***/ function(module, exports) {
+
 module.exports = "<p class=\"error\" *ngIf=\"errorMessage\">{{ errorMessage }}</p>\n<svg id=\"map\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:amcharts=\"http://amcharts.com/ammap\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" viewBox=\"0 0 1000 700\">\n\t<defs>\n\t\t<style type=\"text/css\">\n\t\t\t.land\n\t\t\t{\n\t\t\t\tfill: #CCCCCC;\n\t\t\t\tfill-opacity: 1;\n\t\t\t\tstroke:white;\n\t\t\t\tstroke-opacity: 1;\n\t\t\t\tstroke-width:0.5;\n\t\t\t}\n\t\t</style>\n\t</defs>\n\t<g>\n\t  <path *ngFor=\"let country of countries\" (click)=\"selectCountry(country)\" [ngClass]=\"{'visited': (visitedCountries.indexOf(country.id) !== -1), 'filtered': (country.title.toLowerCase().indexOf(country_filter.value.toLowerCase()) !== -1) }\" id=\"{{ country.id }}\" title=\"{{ country.title }}\" [attr.d]=\"country.d\"/>\n  </g>\n</svg>\n<input id=\"country_filter\" placeholder=\"Country filter\" #country_filter (keyup)=\"0\">\n"
 
 /***/ },
 
-/***/ 708:
+/***/ 709:
 /***/ function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(390);
+module.exports = __webpack_require__(391);
 
 
 /***/ }
 
-},[708]);
+},[709]);
 //# sourceMappingURL=main.bundle.map
