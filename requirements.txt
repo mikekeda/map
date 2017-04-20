@@ -1,9 +1,10 @@
-appdirs==1.4.0
+appdirs==1.4.3
 demjson==2.2.4
-Django==1.10.5
-numpy==1.12.0
+Django==1.11
+numpy==1.12.1
 packaging==16.8
-psycopg2==2.6.2
-pyparsing==2.1.10
+psycopg2==2.7.1
+pyparsing==2.2.0
+pytz==2017.2
 six==1.10.0
 urllib3==1.20
