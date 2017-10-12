@@ -1,10 +1,11 @@
-from django.http import JsonResponse, HttpResponse
-from django.views.generic import View
-from django.contrib.auth.models import User
-from django.core.exceptions import ObjectDoesNotExist
 from urllib.request import urlopen
 import urllib.error
 import json
+
+from django.http import HttpResponse
+from django.views.generic import View
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 
 from travel.models import Profile, Country
 
@@ -19,12 +20,14 @@ def fb_request(callback):
 @fb_request
 def fb_get_user_data(access_token, fields):
     fields = '%2C'.join(fields)
-    return 'https://graph.facebook.com/v2.8/me?fields={0}&access_token={1}'.format(fields, access_token)
+    return 'https://graph.facebook.com/v2.8/me' \
+           '?fields={0}&access_token={1}'.format(fields, access_token)
 
 
 @fb_request
 def fb_get_user_friends(access_token):
-    return 'https://graph.facebook.com/v2.8/me/friends?access_token={0}'.format(access_token)
+    return 'https://graph.facebook.com/v2.8/me/friends' \
+           '?access_token={0}'.format(access_token)
 
 
 class ApiView(View):
@@ -35,7 +38,10 @@ class ApiView(View):
         if fid:
             try:
                 profile = Profile.objects.get(fid=fid)
-                countries = [country.cid for country in profile.visited_countries.all()]
+                countries = [
+                    country.cid
+                    for country in profile.visited_countries.all()
+                ]
                 response = {'countries': countries}
             except ObjectDoesNotExist:
                 pass
@@ -46,7 +52,7 @@ class ApiView(View):
         response["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
         return response
 
-    def options(self, request):
+    def options(self, request, *args, **kwargs):
         response = HttpResponse()
         response['allow'] = "GET, POST, OPTIONS"
         response['Access-Control-Allow-Origin'] = "http://localhost:4200"
@@ -64,13 +70,19 @@ class ApiView(View):
             if fid:
                 try:
                     profile = Profile.objects.get(fid=fid)
-                    countries = [country.cid for country in profile.visited_countries.all()]
+                    countries = [
+                        country.cid
+                        for country in profile.visited_countries.all()
+                    ]
                     response = {'countries': countries}
                 except ObjectDoesNotExist:
                     pass
             elif access_token:
                 countries = []
-                fb_user = fb_get_user_data(access_token, ['id', 'first_name', 'last_name', 'picture', 'email'])
+                fb_user = fb_get_user_data(
+                    access_token,
+                    ['id', 'first_name', 'last_name', 'picture', 'email']
+                )
                 fid = fb_user.get('id')
                 if fid:
                     try:
@@ -100,7 +112,10 @@ class ApiView(View):
                                 profile.visited_countries.add(country)
                             except ObjectDoesNotExist:
                                 pass
-                    countries = [country.cid for country in profile.visited_countries.all()]
+                    countries = [
+                        country.cid
+                        for country in profile.visited_countries.all()
+                    ]
 
                 response = {'countries': countries}
         except urllib.error.URLError as e:
@@ -112,4 +127,5 @@ class ApiView(View):
         response["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
         response["Access-Control-Allow-Headers"] = "content-type"
         response['Access-Control-Max-Age'] = "1800"
+
         return response

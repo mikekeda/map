@@ -10,7 +10,10 @@ from django.dispatch import receiver
 def create_username(sender, instance, **kwargs):
     # Try to generate username with given first_name and last_name.
     if not instance.username and instance.first_name and instance.last_name:
-        username = "{0}{1}".format(instance.first_name[0], instance.last_name).lower()
+        username = "{0}{1}".format(
+            instance.first_name[0],
+            instance.last_name
+        ).lower()
         x = 0
         while True:
             if x == 0 and User.objects.filter(username=username).count() == 0:
@@ -38,8 +41,15 @@ class Country(models.Model):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    visited_countries = models.ManyToManyField(Country, related_name='visitors')
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='profile'
+    )
+    visited_countries = models.ManyToManyField(
+        Country,
+        related_name='visitors'
+    )
     fid = models.BigIntegerField()
 
     def __str__(self):

@@ -1,8 +1,9 @@
-from django.core.management import BaseCommand
-from django.contrib.auth.models import User
-import numpy as np
 import random
 import time
+import numpy as np
+
+from django.core.management import BaseCommand
+from django.contrib.auth.models import User
 
 from travel.models import Profile, Country
 

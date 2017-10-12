@@ -1,6 +1,9 @@
 .idea/
-.DS_Store
-db.sqlite3
 node_modules/
 media/
+reports/
+
 *.pyc
+
+.DS_Store
+db.sqlite3

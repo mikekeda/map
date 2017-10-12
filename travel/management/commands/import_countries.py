@@ -20,9 +20,13 @@ class Command(BaseCommand):
                     if 'id' in raw_country and 'title' in raw_country:
                         cid = raw_country.get('id')
                         title = raw_country.get('title')
-                        country, created = Country.objects.get_or_create(cid=cid, name=title)
+                        _, created = Country.objects.get_or_create(
+                            cid=cid,
+                            name=title
+                        )
                         if created:
-                            self.stdout.write(raw_country.get('title') + ' created')
+                            self.stdout.write(raw_country.get('title') +
+                                              ' created')
                 except demjson.JSONDecodeError:
                     # Skip not valid lines.
                     pass
