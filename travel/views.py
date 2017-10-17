@@ -10,24 +10,15 @@ from django.core.exceptions import ObjectDoesNotExist
 from travel.models import Profile, Country
 
 
-def fb_request(callback):
-    def wrapper(*args, **kwargs):
-        req = urlopen(callback(*args, **kwargs))
-        return json.loads(req.read().decode('utf-8'))
-    return wrapper
-
-
-@fb_request
 def fb_get_user_data(access_token, fields):
     fields = '%2C'.join(fields)
-    return 'https://graph.facebook.com/v2.8/me' \
-           '?fields={0}&access_token={1}'.format(fields, access_token)
+    return urlopen('https://graph.facebook.com/v2.8/me'
+                   '?fields={0}&access_token={1}'.format(fields, access_token))
 
 
-@fb_request
 def fb_get_user_friends(access_token):
-    return 'https://graph.facebook.com/v2.8/me/friends' \
-           '?access_token={0}'.format(access_token)
+    return urlopen('https://graph.facebook.com/v2.8/me/friends'
+                   '?access_token={0}'.format(access_token))
 
 
 class ApiView(View):
@@ -119,7 +110,7 @@ class ApiView(View):
 
                 response = {'countries': countries}
         except urllib.error.URLError as e:
-            response['error'] = e.code
+            response['error'] = e
 
         # return JsonResponse(response)
         response = HttpResponse(json.dumps(response))
