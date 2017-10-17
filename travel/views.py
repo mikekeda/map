@@ -110,7 +110,7 @@ class ApiView(View):
 
                 response = {'countries': countries}
         except urllib.error.URLError as e:
-            response['error'] = e
+            response['error'] = e.code + ': ' + e.reason
 
         # return JsonResponse(response)
         response = HttpResponse(json.dumps(response))
