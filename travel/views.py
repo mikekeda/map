@@ -12,13 +12,15 @@ from travel.models import Profile, Country
 
 def fb_get_user_data(access_token, fields):
     fields = '%2C'.join(fields)
-    return urlopen('https://graph.facebook.com/v2.8/me'
-                   '?fields={0}&access_token={1}'.format(fields, access_token))
+    req = urlopen('https://graph.facebook.com/v2.8/me'
+                  '?fields={0}&access_token={1}'.format(fields, access_token))
+    return json.loads(req.read().decode('utf-8'))
 
 
 def fb_get_user_friends(access_token):
-    return urlopen('https://graph.facebook.com/v2.8/me/friends'
-                   '?access_token={0}'.format(access_token))
+    req = urlopen('https://graph.facebook.com/v2.8/me/friends'
+                  '?access_token={0}'.format(access_token))
+    return json.loads(req.read().decode('utf-8'))
 
 
 class ApiView(View):
