@@ -1,7 +1,7 @@
 [MASTER]
 persistent=yes
 ignore=south_migrations,migrations
-ignored-modules=numpy
+extension-pkg-whitelist=numpy
 cache-size=500
 
 [MESSAGES CONTROL]
