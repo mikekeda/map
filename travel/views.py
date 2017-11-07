@@ -82,14 +82,12 @@ class ApiView(View):
                         # Get profile is exists.
                         profile = Profile.objects.get(fid=fid)
                     except ObjectDoesNotExist:
-                        # Create profile is dose't exist.
-                        first_name = fb_user.get('first_name', 'John')
-                        last_name = fb_user.get('last_name', 'Doe')
+                        # Create profile is doesn't exists.
                         email = fb_user.get('email')
                         password = User.objects.make_random_password()
                         user = User(email=email, password=password)
-                        user.first_name = first_name
-                        user.last_name = last_name
+                        user.first_name = fb_user.get('first_name', 'John')
+                        user.last_name = fb_user.get('last_name', 'Doe')
                         user.save()
                         profile = Profile(user=user)
                         profile.fid = fid
