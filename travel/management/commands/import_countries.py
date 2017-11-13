@@ -26,7 +26,14 @@ class Command(BaseCommand):
                         )
                         if created:
                             self.stdout.write(raw_country.get('title') +
-                                              ' created')
+                                              ' was created')
+                            self.stdout.write('{} was created'.format(
+                                raw_country.get('title')
+                            ))
+                        else:
+                            self.stdout.write('{} already exists'.format(
+                                raw_country.get('title')
+                            ))
                 except demjson.JSONDecodeError:
                     # Skip not valid lines.
                     pass

@@ -1,12 +1,12 @@
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 
-class LoanedBookInstancesByUserListViewTest(TestCase):
-
+class TravelViewTest(TestCase):
     # Pages available for anonymous.
-    def test_countries_endpoint(self):
+    def test_views_countries(self):
         # GET.
-        resp = self.client.get('/api/countries')
+        resp = self.client.get(reverse('countries'))
         self.assertEqual(resp.status_code, 200)
         self.assertJSONEqual(
             str(resp.content, encoding='utf8'),
@@ -14,5 +14,5 @@ class LoanedBookInstancesByUserListViewTest(TestCase):
         )
 
         # OPTIONS.
-        resp = self.client.options('/api/countries')
+        resp = self.client.get(reverse('countries'))
         self.assertEqual(resp.status_code, 200)

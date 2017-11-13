@@ -39,7 +39,7 @@ class Command(BaseCommand):
                 last_name=dummy_last_name,
                 email=dummy_email
             ).delete()
-            self.stdout.write("All test users was deleted")
+            self.stdout.write("All test users ware deleted")
 
         else:
             self.stdout.write("Started user generation")
@@ -66,4 +66,4 @@ class Command(BaseCommand):
                 visited = visited + 1 if visited > 0 else 1
                 visited = random.sample(set(countries), visited)
                 profile.visited_countries.add(*visited)
-                self.stdout.write(user.username + ' created')
+                self.stdout.write('{} was created'.format(user.username))
