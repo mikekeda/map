@@ -17,12 +17,6 @@ def fb_get_user_data(access_token, fields):
     return json.loads(req.read().decode('utf-8'))
 
 
-def fb_get_user_friends(access_token):
-    req = urlopen('https://graph.facebook.com/v2.8/me/friends'
-                  '?access_token={0}'.format(access_token))
-    return json.loads(req.read().decode('utf-8'))
-
-
 class ApiView(View):
     def get(self, request):
         response = {'countries': []}
@@ -57,9 +51,8 @@ class ApiView(View):
     def post(self, request):
         response = {'countries': []}
         try:
-            json_data = json.loads(request.body.decode('utf-8'))
-            access_token = json_data.get('access_token')
-            fid = json_data.get('fid')
+            access_token = request.POST.get('access_token', '')
+            fid = request.POST.get('fid', '')
             if fid:
                 try:
                     profile = Profile.objects.get(fid=fid)
@@ -93,7 +86,7 @@ class ApiView(View):
                         profile.fid = fid
                         profile.save()
 
-                    countries = json_data.get('country_ids')
+                    countries = request.POST.getlist('country_ids', None)
                     if countries is not None:
                         # Update visited countries.
                         profile.visited_countries.clear()
