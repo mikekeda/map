@@ -51,8 +51,9 @@ class ApiView(View):
     def post(self, request):
         response = {'countries': []}
         try:
-            access_token = request.POST.get('access_token', '')
-            fid = request.POST.get('fid', '')
+            json_data = json.loads(request.body.decode('utf-8'))
+            access_token = json_data.get('access_token')
+            fid = json_data.get('fid')
             if fid:
                 try:
                     profile = Profile.objects.get(fid=fid)
@@ -86,7 +87,7 @@ class ApiView(View):
                         profile.fid = fid
                         profile.save()
 
-                    countries = request.POST.getlist('country_ids', None)
+                    countries = json_data.get('country_ids')
                     if countries is not None:
                         # Update visited countries.
                         profile.visited_countries.clear()

@@ -1,3 +1,4 @@
+import json
 import sys
 
 from django.contrib.auth.models import User
@@ -82,20 +83,25 @@ class TravelViewTest(TestCase):
     def test_views_countries_post(self):
         resp = self.client.post(
             reverse('countries') + '?fid=100023334620553',
-            {}
+            json.dumps({}),
+            'application/x-www-form-urlencoded'
         )
         self.assertEqual(resp.status_code, 200)
         self.assertJSONEqual(resp.content.decode('utf-8'), {'countries': []})
 
-        resp = self.client.post(reverse('countries'), {
-            'country_ids': ['UA', 'IT', 'HU'],
-            'access_token': 'EAAJlqSrXJHYBANAAjnz5ECwG3XR9YpRV89sBGKZBwAGyAgA0'
-                            'JW5ffPxHfpJEyojNaaHpjFyquuAU98fqc8XRC8qpIF68K1ETq'
-                            'UndAeJPceyzUEe54S4tzQRpwRMZAH0l9Bu2MAHnKAJTIkVvCi'
-                            '9xsvOMuFqALwTc9YRp34BgtKTAoKHLMH7W0VE3AXLs3vAnZAM'
-                            'QYQjZBhEOQ8puZCLAaS3j4j7r4kZBXpdIcnWU0iPMamzrYLwO'
-                            'Sx'
-        })
+        resp = self.client.post(
+            reverse('countries'),
+            json.dumps({
+                'country_ids': ["UA", "IT", "HU"],
+                'access_token': "EAAJlqSrXJHYBANAAjnz5ECwG3XR9YpRV89sBGKZBwAGy"
+                                "AgA0JW5ffPxHfpJEyojNaaHpjFyquuAU98fqc8XRC8qpI"
+                                "F68K1ETqUndAeJPceyzUEe54S4tzQRpwRMZAH0l9Bu2MA"
+                                "HnKAJTIkVvCi9xsvOMuFqALwTc9YRp34BgtKTAoKHLMH7"
+                                "W0VE3AXLs3vAnZAMQYQjZBhEOQ8puZCLAaS3j4j7r4kZB"
+                                "XpdIcnWU0iPMamzrYLwOSx"
+            }),
+            'application/x-www-form-urlencoded'
+        )
         self.assertEqual(resp.status_code, 200)
         self.assertJSONEqual(
             resp.content.decode('utf-8'),
