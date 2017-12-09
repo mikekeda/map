@@ -54,7 +54,7 @@ class TravelViewTest(TestCase):
     def test_views_countries_get(self):
         resp = self.client.get(reverse('countries'))
         self.assertEqual(resp.status_code, 200)
-        self.assertJSONEqual(resp.content, {'countries': []})
+        self.assertJSONEqual(resp.content.decode('utf-8'), {'countries': []})
 
         # This user doesn't exists.
         resp = self.client.get(
@@ -62,7 +62,7 @@ class TravelViewTest(TestCase):
             {'fid': '101482740643584'}
         )
         self.assertEqual(resp.status_code, 200)
-        self.assertJSONEqual(resp.content, {'countries': []})
+        self.assertJSONEqual(resp.content.decode('utf-8'), {'countries': []})
 
         # This user does exists.
         resp = self.client.get(
@@ -70,7 +70,7 @@ class TravelViewTest(TestCase):
             {'fid': '118703168917503'}
         )
         self.assertEqual(resp.status_code, 200)
-        self.assertJSONEqual(resp.content, {'countries': ['US', 'UA']})
+        self.assertJSONEqual(resp.content.decode('utf-8'), {'countries': ['US', 'UA']})
 
     def test_views_countries_options(self):
         resp = self.client.options(reverse('countries'))
@@ -82,7 +82,7 @@ class TravelViewTest(TestCase):
             {}
         )
         self.assertEqual(resp.status_code, 200)
-        self.assertJSONEqual(resp.content, {'countries': []})
+        self.assertJSONEqual(resp.content.decode('utf-8'), {'countries': []})
 
         resp = self.client.post(reverse('countries'), {
             'country_ids': ['UA', 'IT', 'HU'],
@@ -94,4 +94,4 @@ class TravelViewTest(TestCase):
                             'Sx'
         })
         self.assertEqual(resp.status_code, 200)
-        self.assertJSONEqual(resp.content, {'countries': ['UA', 'IT', 'HU']})
+        self.assertJSONEqual(resp.content.decode('utf-8'), {'countries': ['UA', 'IT', 'HU']})
