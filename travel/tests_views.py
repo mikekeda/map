@@ -70,7 +70,10 @@ class TravelViewTest(TestCase):
             {'fid': '118703168917503'}
         )
         self.assertEqual(resp.status_code, 200)
-        self.assertJSONEqual(resp.content.decode('utf-8'), {'countries': ['US', 'UA']})
+        self.assertJSONEqual(
+            resp.content.decode('utf-8'),
+            {'countries': ['US', 'UA']}
+        )
 
     def test_views_countries_options(self):
         resp = self.client.options(reverse('countries'))
@@ -94,4 +97,7 @@ class TravelViewTest(TestCase):
                             'Sx'
         })
         self.assertEqual(resp.status_code, 200)
-        self.assertJSONEqual(resp.content.decode('utf-8'), {'countries': ['UA', 'IT', 'HU']})
+        self.assertJSONEqual(
+            resp.content.decode('utf-8'),
+            {'countries': ['UA', 'IT', 'HU']}
+        )
