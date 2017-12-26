@@ -39,16 +39,16 @@ class TravelViewTest(TestCase):
     def test_views_fb_get_user_data(self):
         # Get fb Test User.
         user = fb_get_user_data(
-            'EAAJlqSrXJHYBAPOZAS2GA05iztNZCYCKgaHpEz88baJK2wM1cZCdJqZBx9pIHU3N'
-            'VondAAXBvtCzQSvHtFBQeuFywZAPJfYu9m0D8uoEd0lY46zJYc3oOtc7gYV7NcPKM'
-            'kSfQgoaNop9TRpDBnbMSZCczKc5ZAPOECmWTYZAP9UGhISMsKzqbwVBROLXrZBmVo'
-            '1ms1go0XoGnwPNftRcAljT5ZAZCv1RNxJqKvNVOJ2QlWZAYVL9pmkBmGHW',
+            'EAAJlqSrXJHYBAAwGuhyM64DDcw3Fjs7s0pbYhDQcXJC6zzMoYaD1dZB8FDQzsVsC'
+            'kRKPwsTBAoVSHlDriezALw8pDFD4TzPjKZCrK8ZAFCKb2P8FrozPz81lyEfpQD3XP'
+            'DuYvnxJVY6bnswEvHq8ENOegg3yhjO2CCkquhMXXWvHp8La2t9lJcepgzg77pWYPw'
+            '8OI9hcdVpBPbl0ulLnx34vM1oqTBYCTKtKpZBolqK1jCsGdCQg',
             ['id', 'first_name', 'last_name']
         )
         self.assertDictEqual(user, {
-            'id': '118703168917503',
-            'first_name': 'Bob',
-            'last_name': 'Baostein',
+            'id': '101482740643584',
+            'first_name': 'Carol',
+            'last_name': 'Listein',
         })
 
     # Pages available for anonymous.
@@ -93,12 +93,12 @@ class TravelViewTest(TestCase):
             reverse('countries'),
             json.dumps({
                 'country_ids': ["UA", "IT", "HU"],
-                'access_token': "EAAJlqSrXJHYBANAAjnz5ECwG3XR9YpRV89sBGKZBwAGy"
-                                "AgA0JW5ffPxHfpJEyojNaaHpjFyquuAU98fqc8XRC8qpI"
-                                "F68K1ETqUndAeJPceyzUEe54S4tzQRpwRMZAH0l9Bu2MA"
-                                "HnKAJTIkVvCi9xsvOMuFqALwTc9YRp34BgtKTAoKHLMH7"
-                                "W0VE3AXLs3vAnZAMQYQjZBhEOQ8puZCLAaS3j4j7r4kZB"
-                                "XpdIcnWU0iPMamzrYLwOSx"
+                'access_token': "EAAJlqSrXJHYBAAHmZAWS6v5HOLLW5SooSReKBZAxCqi3"
+                                "ogWgP5z0QIbpOwhI41fZBjevYRjyAigF1cMUSdIGFP1vZ"
+                                "A42ytZCgK1uvegHRosVOUDHyKGI2ztY8mKDnE6KWpZC3K"
+                                "z59e7nVmPfmIZB3HrHlSZCyOKr0V4JQpEPOZAxVL9jZBH"
+                                "KR9CirtCKcOGhpBT89vZCOyUJF2aQ9ogw9ytFVcWyWUvk"
+                                "UhAUaIdZBzjtZByMAIwQ0dnuAZBKS8"
             }),
             'application/x-www-form-urlencoded'
         )
