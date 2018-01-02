@@ -4,7 +4,7 @@ certifi==2017.11.5
 chardet==3.0.4
 coverage==4.4.2
 demjson==2.2.4
-Django==2.0
+Django==2.0.1
 django-jenkins==0.110.0
 idna==2.6
 isort==4.2.15
