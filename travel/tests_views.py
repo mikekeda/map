@@ -39,10 +39,10 @@ class TravelViewTest(TestCase):
     def test_views_fb_get_user_data(self):
         # Get fb Test User.
         user = fb_get_user_data(
-            'EAAJlqSrXJHYBAAwGuhyM64DDcw3Fjs7s0pbYhDQcXJC6zzMoYaD1dZB8FDQzsVsC'
-            'kRKPwsTBAoVSHlDriezALw8pDFD4TzPjKZCrK8ZAFCKb2P8FrozPz81lyEfpQD3XP'
-            'DuYvnxJVY6bnswEvHq8ENOegg3yhjO2CCkquhMXXWvHp8La2t9lJcepgzg77pWYPw'
-            '8OI9hcdVpBPbl0ulLnx34vM1oqTBYCTKtKpZBolqK1jCsGdCQg',
+            'EAAJlqSrXJHYBAAkixdWMezAZA1zFZAQ7GCwSIGqX63bq6StjnCA0d0I8GXkZAjYu'
+            'ALEqZBgY0X9fwotYgFVhwnNZAv7RMdRiJKVQ1M7kKmZCGQzA1G0KXHCZBZC8ihPV5'
+            'LBIS2v8vH62GJ8DZAJZBE4lfoKw5s1A70zMQ9F9HicD4LkIpL3n6uZCmL9F2WrnSU'
+            'QQAZCxqDDEnkSbWQPsljrBzMNm5ZAxMza4oRt3y2Yos5p02sZASmdZBXIu46f',
             ['id', 'first_name', 'last_name']
         )
         self.assertDictEqual(user, {
@@ -93,12 +93,12 @@ class TravelViewTest(TestCase):
             reverse('countries'),
             json.dumps({
                 'country_ids': ["UA", "IT", "HU"],
-                'access_token': "EAAJlqSrXJHYBAAHmZAWS6v5HOLLW5SooSReKBZAxCqi3"
-                                "ogWgP5z0QIbpOwhI41fZBjevYRjyAigF1cMUSdIGFP1vZ"
-                                "A42ytZCgK1uvegHRosVOUDHyKGI2ztY8mKDnE6KWpZC3K"
-                                "z59e7nVmPfmIZB3HrHlSZCyOKr0V4JQpEPOZAxVL9jZBH"
-                                "KR9CirtCKcOGhpBT89vZCOyUJF2aQ9ogw9ytFVcWyWUvk"
-                                "UhAUaIdZBzjtZByMAIwQ0dnuAZBKS8"
+                'access_token': "EAAJlqSrXJHYBAEMxDPRoZCsKsUfT2moJaQRSpT8c9ZAA"
+                                "NugUB83JO0VNagKnn6vuLiTIWFF1aoiaMpv9uLToviKTJ"
+                                "W8gXZBij763ObvNK3poLlhT3fcqOqz7NZCwBJ9JHFjmzm"
+                                "gzJKTYDs65iW6xjPkS9G6IN2Sn3GwjO2WJaxCYgY6zlb9"
+                                "vedzKkf5EwT6l3NuMLO0OuDRzMlfVDpPltH4VUngIXauA"
+                                "ni8pQu868HqGQVNe97vf"
             }),
             'application/x-www-form-urlencoded'
         )
