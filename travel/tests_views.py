@@ -39,10 +39,10 @@ class TravelViewTest(TestCase):
     def test_views_fb_get_user_data(self):
         # Get fb Test User.
         user = fb_get_user_data(
-            'EAAJlqSrXJHYBAGXlAQy1nq29ym8Nrz6pyIZAMUYWMnoJIvM6bJiZCPSXcimZCWoq'
-            '1TRoTLORTRLq6rfirEG7sehlllNOwEzlZCU9JJaTFJsEC8xh0ZAGtCsAouSbvenCx'
-            '7wICF6u1MgU6OupqLsSdXhGpbHIRXIbFq9u3sQ9rND6f7E2EDvMPQp8ZCTZAS5gVJ'
-            'hSSGVbvy2fzpywTzi8RvTyBjfrHg4kOqqliOgMIOLfVGMFd9A9Ch7',
+            'EAAJlqSrXJHYBAGx8ZAIqRVVnGQekQHGLxHTLQ3sNEciEchqZB2QVe6zfFe2mGGG8'
+            '7NZB0aMAAidvYoBhgXBAl9X0gKyQPS3ZCPvoedzZA57m7k6z0BwFngyZBInZBH0rF'
+            'wBZBMqCmpGUz9fs3f8gZAosPNfzMAnpZCouc1s63vfWsYPwJNp1nFV4S4nijREOnY'
+            'fBiwEHs5whUPsabja8IMBKvlG39vxm7DKZCbWpvmeEt9mU0QVenXqnMkF',
             ['id', 'first_name', 'last_name']
         )
         self.assertDictEqual(user, {
@@ -93,12 +93,12 @@ class TravelViewTest(TestCase):
             reverse('countries'),
             json.dumps({
                 'country_ids': ["UA", "IT", "HU"],
-                'access_token': "EAAJlqSrXJHYBAPaGqUHx5HLx16sBZBYFWJTZCF6uuXKU"
-                                "ZCzgqn4PuAqKnd08oDa3cqsQuLpZAMH7QGZAJtLXw1Pp0"
-                                "ffLTWg2bLuPzlH7G7pWi5m5Vfy5D8E117fZBOIsnIM2DF"
-                                "WESfyZBelxg6x4pUcJqZBODtJrz0qrptrTuxVDnRwnssg"
-                                "hONuEsA3Atan3ZAZCORi31lW8pZANJ8Thk7bAQ5yOCZCr"
-                                "JcRBKy8e56PNnXEncGrT3aZBmZBBCX"
+                'access_token': "EAAJlqSrXJHYBAE1EuhduEeNGNyCfWVe1DNejGPPaSBGX"
+                                "t1YeWnOmVrsFAWfZB7ELDcMaTIKwutqrYMGJBvmVv41l2"
+                                "6vWxNEqZCKA9FJXqGMYjylUGSx4ZBKFcVqJ2k0cdDJP0K"
+                                "5E360244gCLpSyf7Vs5OMAo8GXnDCBhmbycLFToLQXBfA"
+                                "7MMfGjvLNZCGVBZA6LZApyk04S4GXMwQxKyaZApixLahg"
+                                "ZCWv62lNSiumZB2wPZCU8E6Caf"
             }),
             'application/x-www-form-urlencoded'
         )
