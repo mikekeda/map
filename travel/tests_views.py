@@ -10,6 +10,13 @@ from django.utils.six import StringIO
 from .models import Profile, Country
 from .views import fb_get_user_data
 
+# Need to update access token on each run (developers.facebook.com/apps).
+access_token = "EAAJlqSrXJHYBAJf2x87ZBzBRKMlzZCZCNZAFNYnE9NnZApXnd35kaWQUjPl" \
+               "HpAS3dMfmrKZCFQnULZCAuaL84jSjlDrLAP1rVzL6RHtBoUYzzz80FKNCYDO" \
+               "jeWpQ5t12Mudo5zmUcPQ6x32s78ELiQlXUqfOk5kaZCZBBIC4odi5jxZBi3V" \
+               "5zMmfKbXe15Crstnt1YP14vk67Hj8z91n2J53sc4cZBYjnRPeDa5ZA1cXCD0" \
+               "ZAOjz9UwgUOXYI"
+
 
 class TravelViewTest(TestCase):
     @classmethod
@@ -39,10 +46,7 @@ class TravelViewTest(TestCase):
     def test_views_fb_get_user_data(self):
         # Get fb Test User.
         user = fb_get_user_data(
-            'EAAJlqSrXJHYBAGx8ZAIqRVVnGQekQHGLxHTLQ3sNEciEchqZB2QVe6zfFe2mGGG8'
-            '7NZB0aMAAidvYoBhgXBAl9X0gKyQPS3ZCPvoedzZA57m7k6z0BwFngyZBInZBH0rF'
-            'wBZBMqCmpGUz9fs3f8gZAosPNfzMAnpZCouc1s63vfWsYPwJNp1nFV4S4nijREOnY'
-            'fBiwEHs5whUPsabja8IMBKvlG39vxm7DKZCbWpvmeEt9mU0QVenXqnMkF',
+            access_token,
             ['id', 'first_name', 'last_name']
         )
         self.assertDictEqual(user, {
@@ -93,12 +97,7 @@ class TravelViewTest(TestCase):
             reverse('countries'),
             json.dumps({
                 'country_ids': ["UA", "IT", "HU"],
-                'access_token': "EAAJlqSrXJHYBAE1EuhduEeNGNyCfWVe1DNejGPPaSBGX"
-                                "t1YeWnOmVrsFAWfZB7ELDcMaTIKwutqrYMGJBvmVv41l2"
-                                "6vWxNEqZCKA9FJXqGMYjylUGSx4ZBKFcVqJ2k0cdDJP0K"
-                                "5E360244gCLpSyf7Vs5OMAo8GXnDCBhmbycLFToLQXBfA"
-                                "7MMfGjvLNZCGVBZA6LZApyk04S4GXMwQxKyaZApixLahg"
-                                "ZCWv62lNSiumZB2wPZCU8E6Caf"
+                'access_token': access_token
             }),
             'application/x-www-form-urlencoded'
         )
