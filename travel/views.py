@@ -77,9 +77,10 @@ class ApiView(View):
                         profile = Profile.objects.get(fid=fid)
                     except ObjectDoesNotExist:
                         # Create profile is doesn't exists.
-                        email = fb_user.get('email')
-                        password = User.objects.make_random_password()
-                        user = User(email=email, password=password)
+                        user = User(
+                            email=fb_user.get('email'),
+                            password=User.objects.make_random_password()
+                        )
                         user.first_name = fb_user.get('first_name', 'John')
                         user.last_name = fb_user.get('last_name', 'Doe')
                         user.save()
@@ -106,7 +107,6 @@ class ApiView(View):
         except urllib.error.URLError as e:
             response['error'] = e.reason
 
-        # return JsonResponse(response)
         response = HttpResponse(json.dumps(response))
         response["Access-Control-Allow-Origin"] = "http://localhost:4200"
         response["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
