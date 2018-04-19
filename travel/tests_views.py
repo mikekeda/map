@@ -11,11 +11,11 @@ from .models import Profile, Country
 from .views import fb_get_user_data
 
 # Need to update access token on each run (developers.facebook.com/apps).
-access_token = "EAAJlqSrXJHYBADBBOLt2Y4lwJERW9ETlCHNuyZCzZAxXZA00i1N8FtNkOJq" \
-               "wI1M9b1BPNZBdk1UZBUM3ACwyGRnjjxhVFRGUCeKqHsZBR7WQOziEWw9zPc6" \
-               "SAKOMmvi2IqfgVTOklunCzZB0N9HWQBY1CRbrbnQgY0jqRAjb1b9ZAZBfJZA" \
-               "e5J9WylKz8a8ThIvZAZBlj7ZCVndV0kbYZCZBAFwosZA2gQdbxzIpgdkKAui" \
-               "UqqIdLtJgkZATlUtPq"
+access_token = "EAAJlqSrXJHYBAMVlQZB8tEdHDeY0budRIzaROG2Ar087e1UenxiLkpkQ6Mf" \
+               "ocGgLffZCin4rWFBZB1R6c2Y7Xa7w3xgiUnWaJuLl94ZCzn8ogco0sOCkxRe" \
+               "59rrN38JBuq7gYa5fLi4SAYp3IaBRJPDiMP6ZCR2KpYyNmhOk6fBZBRuMOsn" \
+               "o2MpAAIILfaEdnSEn4ZBybYh2XZBrqsMQZAKlK7wtf1UNXalAaCBAuPrKNvZ" \
+               "BR7hkrJwP7u"
 
 
 class TravelViewTest(TestCase):
