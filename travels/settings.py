@@ -62,6 +62,9 @@ INSTALLED_APPS = [
     'travel'
 ]
 
+if not DEBUG:
+    INSTALLED_APPS += ['opbeat.contrib.django']
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -71,6 +74,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+if not DEBUG:
+    MIDDLEWARE = ['opbeat.contrib.django.middleware.OpbeatAPMMiddleware'] + \
+                 MIDDLEWARE
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -166,3 +173,9 @@ JENKINS_TASKS = ('django_jenkins.tasks.run_pylint',
 PROJECT_APPS = ['travel', 'travels']
 
 PYLINT_LOAD_PLUGIN = ['pylint_django']
+
+OPBEAT = {
+    'ORGANIZATION_ID': get_env_var('OPBEAT_ORGANIZATION_ID'),
+    'APP_ID': get_env_var('OPBEAT_APP_ID'),
+    'SECRET_TOKEN': get_env_var('OPBEAT_SECRET_TOKEN'),
+}
