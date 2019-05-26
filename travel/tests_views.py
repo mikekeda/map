@@ -10,11 +10,12 @@ from django.utils.six import StringIO
 from .models import Profile, Country
 from .views import fb_get_user_data
 
-# Need to update access token on each run (developers.facebook.com/apps).
-access_token = "EAAJlqSrXJHYBAFMSFEnD3aZB7ZCLlaebkWqYOUU3vG4sgsXBbJcYFVRP24M" \
-               "QrhNBdmsjOlPVh4f8kxELYRfw500KdFlQB8PjLiyTzotI6yBNxxNQ8lglwDu" \
-               "Coj1tXZA3Mgut0wKEt4nOrxSIZC6qPItnsZCxwmNzA1Ke9YJWMOayLO9ih9j" \
-               "21eZCPVPq4ecSK7yPegybxuiG1Yo20ocrmrlLoMEeT2OunTVdhGusym5AZDZD"
+# Need to update access token on each run,
+# https://developers.facebook.com/apps/674727196042358/roles/test-users/
+access_token = "EAAJlqSrXJHYBACqKI9yTiucOzqc18oxlZAMZAO8QSgN4YCyN9AQK3agAWGM" \
+               "gMSceWXiOsWKsMJJ5noKZCE8KzXYEdl3ss2SwZAAwq5xwd4lLWZBIizQaqke" \
+               "qNA23M58rsbYEnQFH07DuCP3Td54HjHPbrS3F4s6ZAg51hoa8doJN9ZAJGjb" \
+               "c7PqjnKpxV8HbqZAKQOOdPxLsEAZDZD"
 
 
 class TravelViewTest(TestCase):
@@ -85,7 +86,7 @@ class TravelViewTest(TestCase):
 
     def test_views_countries_post(self):
         resp = self.client.post(
-            reverse('countries') + '?fid=100023334620553',
+            reverse('countries') + '?fid=118703168917503',
             json.dumps({}),
             'application/x-www-form-urlencoded'
         )
