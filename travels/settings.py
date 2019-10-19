@@ -4,6 +4,20 @@ Django settings for Travels project.
 
 import os
 import requests
+from django_jenkins.tasks import run_pylint
+
+
+class Lint:
+    """
+    Monkey patch to fix
+    TypeError: __init__() got an unexpected keyword argument 'exit'.
+    """
+    class Run(run_pylint.lint.Run):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, do_exit=kwargs.pop("exit"), **kwargs)
+
+
+run_pylint.lint = Lint
 
 SITE_ENV_PREFIX = 'TRAVELS'
 

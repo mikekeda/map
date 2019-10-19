@@ -1,16 +1,13 @@
-astroid==1.6.5
 coverage==4.5.3
 demjson==2.2.4
-Django==2.2.1
+Django==2.2.6
 django-jenkins==0.110.0
 gunicorn==19.9.0
-numpy==1.15.0
+numpy==1.17.3
 pep8==1.7.1
-psycopg2-binary==2.8.2
+psycopg2-binary==2.8.3
 pyflakes==2.1.1
-# There is a problem with django-jenkins and new version of pylint
-# https://github.com/kmmbvnr/django-jenkins/issues/367
-pylint==1.9.2
-pylint-django==0.11.1
-pylint-plugin-utils==0.4
+pylint==2.4.3
+pylint-django==2.0.11
+pylint-plugin-utils==0.6
 requests==2.22.0

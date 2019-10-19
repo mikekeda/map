@@ -7,15 +7,15 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils.six import StringIO
 
-from .models import Profile, Country
-from .views import fb_get_user_data
+from travel.models import Profile, Country
+from travel.views import fb_get_user_data
 
 # Need to update access token on each run,
 # https://developers.facebook.com/apps/674727196042358/roles/test-users/
-access_token = "EAAJlqSrXJHYBACqKI9yTiucOzqc18oxlZAMZAO8QSgN4YCyN9AQK3agAWGM" \
-               "gMSceWXiOsWKsMJJ5noKZCE8KzXYEdl3ss2SwZAAwq5xwd4lLWZBIizQaqke" \
-               "qNA23M58rsbYEnQFH07DuCP3Td54HjHPbrS3F4s6ZAg51hoa8doJN9ZAJGjb" \
-               "c7PqjnKpxV8HbqZAKQOOdPxLsEAZDZD"
+access_token = "EAAJlqSrXJHYBAIy3mkUTW2O1msYyaj9SHEiqbVaJyoUq3Cm7RFAERFm9J0" \
+               "XKFCLfuwXE9yWz1u0LvXfFMPIN2SvPebJjkZA4yEdeZBFLoYdYZAoSPDlm2" \
+               "pqdTk3HBJ7G0zZCQb8dPPGOWGtZAVfj6t0czdpKcSvKMPjT3zbfMzC3A1n4" \
+               "dlOtrV8ZCTT4hqyczxNnUvK8UtLw8n3UtCNKqa"
 
 
 class TravelViewTest(TestCase):
