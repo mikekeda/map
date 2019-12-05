@@ -12,10 +12,10 @@ from travel.views import fb_get_user_data
 
 # Need to update access token on each run,
 # https://developers.facebook.com/apps/674727196042358/roles/test-users/
-access_token = "EAAJlqSrXJHYBAIy3mkUTW2O1msYyaj9SHEiqbVaJyoUq3Cm7RFAERFm9J0" \
-               "XKFCLfuwXE9yWz1u0LvXfFMPIN2SvPebJjkZA4yEdeZBFLoYdYZAoSPDlm2" \
-               "pqdTk3HBJ7G0zZCQb8dPPGOWGtZAVfj6t0czdpKcSvKMPjT3zbfMzC3A1n4" \
-               "dlOtrV8ZCTT4hqyczxNnUvK8UtLw8n3UtCNKqa"
+access_token = "EAAJlqSrXJHYBAHSg6agNPmEdRzb85udAE3ShamzYC3iVm0wjrENZBlIE6" \
+               "ehcTBIZC8BvPHtzlGvWZAt1ZAubLqCWVitk9X1232aQPDToqWnNWp2dFET" \
+               "JjSrmhKbOFs6tIIqkNMW3MEqBI47VpTMqBXwCtnwErL1atFqfZBBpaBq7X" \
+               "x4VhS32UXW0K6KyXRsodYhZCPuFq6DjNQYuxBcsLL"
 
 
 class TravelViewTest(TestCase):

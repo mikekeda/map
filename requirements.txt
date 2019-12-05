@@ -1,13 +1,6 @@
-coverage==4.5.3
 demjson==2.2.4
-Django==2.2.6
-django-jenkins==0.110.0
-gunicorn==19.9.0
-numpy==1.17.3
-pep8==1.7.1
-psycopg2-binary==2.8.3
-pyflakes==2.1.1
-pylint==2.4.3
-pylint-django==2.0.11
-pylint-plugin-utils==0.6
+Django==2.2.8
+gunicorn==20.0.4
+numpy==1.17.4
+psycopg2-binary==2.8.4
 requests==2.22.0
