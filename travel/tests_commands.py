@@ -2,8 +2,8 @@ import sys
 
 from django.contrib.auth.models import User
 from django.core.management import call_command
-from django.utils.six import StringIO
 from django.test import TestCase
+from io import StringIO
 
 
 class TravelCommandsTest(TestCase):

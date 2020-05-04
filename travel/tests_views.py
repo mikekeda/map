@@ -5,17 +5,18 @@ from django.contrib.auth.models import User
 from django.core.management import call_command
 from django.test import TestCase
 from django.urls import reverse
-from django.utils.six import StringIO
+from io import StringIO
 
 from travel.models import Profile, Country
 from travel.views import fb_get_user_data
 
 # Need to update access token on each run,
 # https://developers.facebook.com/apps/674727196042358/roles/test-users/
-access_token = "EAAJlqSrXJHYBAHSg6agNPmEdRzb85udAE3ShamzYC3iVm0wjrENZBlIE6" \
-               "ehcTBIZC8BvPHtzlGvWZAt1ZAubLqCWVitk9X1232aQPDToqWnNWp2dFET" \
-               "JjSrmhKbOFs6tIIqkNMW3MEqBI47VpTMqBXwCtnwErL1atFqfZBBpaBq7X" \
-               "x4VhS32UXW0K6KyXRsodYhZCPuFq6DjNQYuxBcsLL"
+access_token = "EAAJlqSrXJHYBAGhJ79AZBFSH2Jx1bnR2spfewtzM7LcKXzIaZAKIfC1Knu" \
+               "vQNc8zKUm9NivtU1I5ayaKLOE8ok7oZBq4IAL2ZCHTcFX8UFeamf0FQfCBv" \
+               "wJ3FsX0oSN920dWy208qfy7zBkS5NWEOA8DmcfXLgPIbTmrdcBRT7F4RZAZ" \
+               "C25IkFMLGoefCvzeLy14d" \
+               "dFZAYqE2o5IvQm3hKL"
 
 
 class TravelViewTest(TestCase):

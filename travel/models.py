@@ -10,10 +10,7 @@ from django.dispatch import receiver
 def create_username(sender, instance, **kwargs):
     # Try to generate username with given first_name and last_name.
     if not instance.username and instance.first_name and instance.last_name:
-        username = "{0}{1}".format(
-            instance.first_name[0],
-            instance.last_name
-        ).lower()
+        username = (instance.first_name[0] + instance.last_name).lower()
         x = 0
         while True:
             if x == 0 and User.objects.filter(username=username).count() == 0:
@@ -35,9 +32,7 @@ class Country(models.Model):
     name = models.CharField(max_length=60, blank=True)
 
     def __str__(self):
-        return u'%s' % (
-            self.name,
-        )
+        return self.name
 
 
 class Profile(models.Model):
@@ -53,6 +48,4 @@ class Profile(models.Model):
     fid = models.BigIntegerField()
 
     def __str__(self):
-        return u'%s' % (
-            self.user.username,
-        )
+        return self.user.username

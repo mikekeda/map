@@ -56,7 +56,7 @@ SECRET_KEY = get_env_var(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(get_env_var('DEBUG', True))
+DEBUG = bool(get_env_var('DEBUG', 'True'))
 
 ALLOWED_HOSTS = get_env_var('ALLOWED_HOSTS', '*').split(',')
 
@@ -83,7 +83,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
