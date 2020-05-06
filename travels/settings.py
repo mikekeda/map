@@ -4,20 +4,25 @@ Django settings for Travels project.
 
 import os
 import requests
-from django_jenkins.tasks import run_pylint
+
+try:
+    from django_jenkins.tasks import run_pylint
 
 
-class Lint:
-    """
-    Monkey patch to fix
-    TypeError: __init__() got an unexpected keyword argument 'exit'.
-    """
-    class Run(run_pylint.lint.Run):
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, do_exit=kwargs.pop("exit"), **kwargs)
+    class Lint:
+        """
+        Monkey patch to fix
+        TypeError: __init__() got an unexpected keyword argument 'exit'.
+        """
+        class Run(run_pylint.lint.Run):
+            def __init__(self, *args, **kwargs):
+                super().__init__(*args, do_exit=kwargs.pop("exit"), **kwargs)
 
 
-run_pylint.lint = Lint
+    run_pylint.lint = Lint
+
+except ImportError:
+    run_pylint = None
 
 SITE_ENV_PREFIX = 'TRAVELS'
 
@@ -71,13 +76,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'django_jenkins',
-
     'travel'
 ]
 
-if not DEBUG:
-    INSTALLED_APPS += ['opbeat.contrib.django']
+if DEBUG:
+    INSTALLED_APPS += ['django_jenkins']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -88,10 +91,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-if not DEBUG:
-    MIDDLEWARE = ['opbeat.contrib.django.middleware.OpbeatAPMMiddleware'] + \
-                 MIDDLEWARE
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -176,9 +175,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-STATIC_ROOT = '/home/voron/sites/cdn/map'
+STATIC_ROOT = '/home/voron/sites/cdn/travels'
 
-STATIC_URL = '/static/' if DEBUG else 'https://cdn.mkeda.me/map/'
+STATIC_URL = '/static/' if DEBUG else 'https://cdn.mkeda.me/travels/'
 
 JENKINS_TASKS = ('django_jenkins.tasks.run_pylint',
                  'django_jenkins.tasks.run_pep8',
@@ -187,9 +186,3 @@ JENKINS_TASKS = ('django_jenkins.tasks.run_pylint',
 PROJECT_APPS = ['travel', 'travels']
 
 PYLINT_LOAD_PLUGIN = ['pylint_django']
-
-OPBEAT = {
-    'ORGANIZATION_ID': get_env_var('OPBEAT_ORGANIZATION_ID'),
-    'APP_ID': get_env_var('OPBEAT_APP_ID'),
-    'SECRET_TOKEN': get_env_var('OPBEAT_SECRET_TOKEN'),
-}
