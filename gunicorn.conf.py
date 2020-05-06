@@ -2,11 +2,11 @@
 """
     Gunicorn config.
 """
-bind = 'unix:/uwsgi/map.sock'
+bind = 'unix:/uwsgi/travels.sock'
 workers = 1
 timeout = 30
 max_requests = 100
 daemon = False
 umask = '91'
-user = 'nobody'
+user = 'nginx'
 loglevel = 'info'
