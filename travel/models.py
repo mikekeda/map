@@ -1,9 +1,11 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+
+User = get_user_model()
 
 
 @receiver(pre_save, sender=User, dispatch_uid='autocreate_username')
@@ -16,11 +18,12 @@ def create_username(sender, instance, **kwargs):
             if x == 0 and User.objects.filter(username=username).count() == 0:
                 instance.username = username
                 break
-            else:
-                new_username = "{0}{1}".format(username, x)
-                if User.objects.filter(username=new_username).count() == 0:
-                    instance.username = new_username
-                    break
+
+            new_username = "{0}{1}".format(username, x)
+            if User.objects.filter(username=new_username).count() == 0:
+                instance.username = new_username
+                break
+
             x += 1
             if x > 1000000:
                 raise Exception("Name is super popular!")

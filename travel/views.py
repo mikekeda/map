@@ -4,10 +4,12 @@ import json
 
 from django.http import HttpResponse
 from django.views.generic import View
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 
 from travel.models import Profile, Country
+
+User = get_user_model()
 
 
 def fb_get_user_data(access_token, fields):

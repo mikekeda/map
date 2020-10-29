@@ -1,14 +1,16 @@
+from io import StringIO
 import json
 import sys
 
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.management import call_command
 from django.test import TestCase
 from django.urls import reverse
-from io import StringIO
 
 from travel.models import Profile, Country
 from travel.views import fb_get_user_data
+
+User = get_user_model()
 
 # Need to update access token on each run,
 # https://developers.facebook.com/apps/674727196042358/roles/test-users/

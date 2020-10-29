@@ -3,9 +3,11 @@ import time
 import numpy
 
 from django.core.management import BaseCommand
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 from travel.models import Profile, Country
+
+User = get_user_model()
 
 
 # The class must be named Command, and subclass BaseCommand

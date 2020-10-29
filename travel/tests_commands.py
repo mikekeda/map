@@ -1,9 +1,11 @@
+from io import StringIO
 import sys
 
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.management import call_command
 from django.test import TestCase
-from io import StringIO
+
+User = get_user_model()
 
 
 class TravelCommandsTest(TestCase):
