@@ -12,7 +12,7 @@ from travel.models import Profile, Country
 
 def fb_get_user_data(access_token, fields):
     fields = '%2C'.join(fields)
-    req = urlopen('https://graph.facebook.com/v3.1/me'
+    req = urlopen('https://graph.facebook.com/v8.0/me'
                   '?fields={}&access_token={}'.format(fields, access_token))
     return json.loads(req.read().decode('utf-8'))
 
