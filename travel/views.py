@@ -2,7 +2,7 @@ from urllib.request import urlopen
 import urllib.error
 import json
 
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.generic import View
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
@@ -35,8 +35,7 @@ class ApiView(View):
             except ObjectDoesNotExist:
                 pass
 
-        # return JsonResponse(response)
-        response = HttpResponse(json.dumps(response))
+        response = JsonResponse(response)
         response["Access-Control-Allow-Origin"] = "http://localhost:4200"
         response["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
         return response
@@ -107,9 +106,9 @@ class ApiView(View):
 
                 response = {'countries': countries}
         except urllib.error.URLError as e:
-            response['error'] = e.reason
+            response['error'] = str(e.reason)
 
-        response = HttpResponse(json.dumps(response))
+        response = JsonResponse(response)
         response["Access-Control-Allow-Origin"] = "http://localhost:4200"
         response["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
         response["Access-Control-Allow-Headers"] = "content-type"
