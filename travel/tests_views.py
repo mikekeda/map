@@ -14,10 +14,10 @@ User = get_user_model()
 
 # Need to update access token on each run,
 # https://developers.facebook.com/apps/674727196042358/roles/test-users/
-access_token = "EAAJlqSrXJHYBAEvzoSnIlJZCu25zPkxKvUv53QCEqu8Vk5y5qsE42yYcYd" \
-               "oTtcLFIf5Qv6umZAZCbaqNRLUE3ZBShNlPepZCFYJYJeTnHqE4yB5eZCODo" \
-               "oBhidgN6zZCU3topDJP92tWiit4s6SWB28L5IUp380u08ltFSFt9qQboALb" \
-               "xiPcxQg7crydizWvjp8ZAhn8x8Mw2qcNO1SVdf9ZA"
+access_token = "EAAJlqSrXJHYBACXvIXYWRLESwEBRx03ErN1ZBZBs1cqFEZC1dSmtcCFgTy" \
+               "nkjcQpI6t74DZCZA9gVNskssB71hVZARpjpqNPL1ZCUEzBgUiZAHkagtj7C" \
+               "E6lOF0KORImXSvkcBwVSgNUGXYHbRQssK2YIZCWWc6jUb5XyuZA3d6NPiwq" \
+               "aUiNUPSzWEKsHodzH2Uloyk9wBetn4aO3DfWAIbfdU"
 
 
 class TravelViewTest(TestCase):

@@ -1,6 +1,5 @@
 import random
 import time
-import numpy
 
 from django.core.management import BaseCommand
 from django.contrib.auth import get_user_model
@@ -47,7 +46,6 @@ class Command(BaseCommand):
             self.stdout.write("Started user generation")
             options['amount'] = options['amount'] if options['amount'] else 1
             countries = Country.objects.all()
-            visited_total = numpy.random.normal(4, 6, options['amount'])
             for i in range(options['amount']):
                 # Create user.
                 user = User(
@@ -64,8 +62,7 @@ class Command(BaseCommand):
                 profile.save()
 
                 # Add visited countries.
-                visited = int(visited_total[i])
-                visited = visited + 1 if visited > 0 else 1
+                visited = random.randint(1, 15)
                 visited = random.sample(set(countries), visited)
                 profile.visited_countries.add(*visited)
                 self.stdout.write('{} was created'.format(user.username))
