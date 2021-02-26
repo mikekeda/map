@@ -32,7 +32,9 @@ class TravelViewTest(TestCase):
         call_command("import_countries")
 
         # Create usual user.
-        test_user = User.objects.create_user(username="testuser", password="12345")
+        test_user = User.objects.create_user(
+            username="testuser", password=User.objects.make_random_password()
+        )
         test_user.save()
 
         # Create profile.
