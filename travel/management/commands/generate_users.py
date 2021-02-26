@@ -50,7 +50,7 @@ class Command(BaseCommand):
             self.stdout.write("Started user generation")
             options["amount"] = options["amount"] if options["amount"] else 1
             countries = Country.objects.all()
-            for i in range(options["amount"]):
+            for _ in range(options["amount"]):
                 # Create user.
                 user = User(
                     first_name=dummy_first_name,
