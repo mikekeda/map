@@ -16,43 +16,47 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         # Positional arguments
-        parser.add_argument('amount', nargs='?', type=int,)
+        parser.add_argument(
+            "amount",
+            nargs="?",
+            type=int,
+        )
 
         # Named (optional) arguments
         parser.add_argument(
-            '-d',
-            '--delete',
-            action='store_true',
-            dest='delete',
+            "-d",
+            "--delete",
+            action="store_true",
+            dest="delete",
             default=False,
-            help='Delete all dummy users',
+            help="Delete all dummy users",
         )
 
     def handle(self, *args, **options):
-        dummy_first_name = 'Dummy'
-        dummy_last_name = 'User'
-        dummy_email = 'dummy@email.com'
+        dummy_first_name = "Dummy"
+        dummy_last_name = "User"
+        dummy_email = "dummy@email.com"
 
-        if options['delete']:
+        if options["delete"]:
             # Delete users.
             User.objects.filter(
                 first_name=dummy_first_name,
                 last_name=dummy_last_name,
-                email=dummy_email
+                email=dummy_email,
             ).delete()
             self.stdout.write("All test users ware deleted")
 
         else:
             self.stdout.write("Started user generation")
-            options['amount'] = options['amount'] if options['amount'] else 1
+            options["amount"] = options["amount"] if options["amount"] else 1
             countries = Country.objects.all()
-            for i in range(options['amount']):
+            for i in range(options["amount"]):
                 # Create user.
                 user = User(
                     first_name=dummy_first_name,
                     last_name=dummy_last_name,
                     email=dummy_email,
-                    password=User.objects.make_random_password()
+                    password=User.objects.make_random_password(),
                 )
                 user.save()
 
@@ -65,4 +69,4 @@ class Command(BaseCommand):
                 visited = random.randint(1, 15)
                 visited = random.sample(set(countries), visited)
                 profile.visited_countries.add(*visited)
-                self.stdout.write('{} was created'.format(user.username))
+                self.stdout.write("{} was created".format(user.username))

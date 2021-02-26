@@ -14,10 +14,11 @@ User = get_user_model()
 
 # Need to update access token on each run,
 # https://developers.facebook.com/apps/674727196042358/roles/test-users/
-access_token = "EAAJlqSrXJHYBAD6SCbZC7Ilg3VQsMnz6GnI0j4j4urs3UfAXlsCCjU2A01" \
-               "Oqn8KZByNWZAlenZBmjqguLEIZBsWT5cF30o9zZBMp09LluPQZCTeMmPZCe" \
-               "qlcN5DdLI6MhDw99KcIUfwtlgD50gRnYyOpMjpqToz14LOiBvCStcoMaZAI" \
-               "DhO3KamNjdURUuZAwRmJ4ZCXd6lsTPwD0XLhm8g7o2ZC"
+access_token = (
+    "EAAJlqSrXJHYBAMKuFLZCuHqhAc3UrtVbNsTx0V0AgySbHMk8IwRHP7BC6ZA0pMFJl2s5z3nOvyoQyRv0"
+    "6Jiko8k13SzkgElUDhZAZCXs7ZB6WBCj6m5UqTeg4gZCH8wCVNVX4jZCawwnKZBuHAtyBqlMPwzfNgcEc"
+    "ZAgkQGDLyBhjYMvUWjX9DOqZCKKwAm4U42ZCIdAoRr2uGi79p2iecyseY7"
+)
 
 
 class TravelViewTest(TestCase):
@@ -28,11 +29,10 @@ class TravelViewTest(TestCase):
         # Import countries.
         out = StringIO()
         sys.stdout = out
-        call_command('import_countries')
+        call_command("import_countries")
 
         # Create usual user.
-        test_user = User.objects.create_user(username='testuser',
-                                             password='12345')
+        test_user = User.objects.create_user(username="testuser", password="12345")
         test_user.save()
 
         # Create profile.
@@ -41,70 +41,59 @@ class TravelViewTest(TestCase):
         profile.save()
 
         # Add few visited countries.
-        visited = Country.objects.filter(name__in=['Ukraine', 'United States'])
+        visited = Country.objects.filter(name__in=["Ukraine", "United States"])
         profile.visited_countries.add(*visited)
 
     # Helper functions.
     def test_views_fb_get_user_data(self):
         # Get fb Test User.
-        user = fb_get_user_data(
-            access_token,
-            ['id', 'first_name', 'last_name']
+        user = fb_get_user_data(access_token, ["id", "first_name", "last_name"])
+        self.assertDictEqual(
+            user,
+            {
+                "id": "118703168917503",
+                "first_name": "Bob",
+                "last_name": "Baostein",
+            },
         )
-        self.assertDictEqual(user, {
-            'id': '118703168917503',
-            'first_name': 'Bob',
-            'last_name': 'Baostein',
-        })
 
     # Pages available for anonymous.
     def test_views_countries_get(self):
-        resp = self.client.get(reverse('countries'))
+        resp = self.client.get(reverse("countries"))
         self.assertEqual(resp.status_code, 200)
-        self.assertJSONEqual(resp.content.decode('utf-8'), {'countries': []})
+        self.assertJSONEqual(resp.content.decode("utf-8"), {"countries": []})
 
         # This user doesn't exists.
-        resp = self.client.get(
-            reverse('countries'),
-            {'fid': '101482740643584'}
-        )
+        resp = self.client.get(reverse("countries"), {"fid": "101482740643584"})
         self.assertEqual(resp.status_code, 200)
-        self.assertJSONEqual(resp.content.decode('utf-8'), {'countries': []})
+        self.assertJSONEqual(resp.content.decode("utf-8"), {"countries": []})
 
         # This user does exists.
-        resp = self.client.get(
-            reverse('countries'),
-            {'fid': '118703168917503'}
-        )
+        resp = self.client.get(reverse("countries"), {"fid": "118703168917503"})
         self.assertEqual(resp.status_code, 200)
-        self.assertJSONEqual(
-            resp.content.decode('utf-8'),
-            {'countries': ['US', 'UA']}
-        )
+        self.assertJSONEqual(resp.content.decode("utf-8"), {"countries": ["US", "UA"]})
 
     def test_views_countries_options(self):
-        resp = self.client.options(reverse('countries'))
+        resp = self.client.options(reverse("countries"))
         self.assertEqual(resp.status_code, 200)
 
     def test_views_countries_post(self):
         resp = self.client.post(
-            reverse('countries') + '?fid=118703168917503',
+            reverse("countries") + "?fid=118703168917503",
             json.dumps({}),
-            'application/x-www-form-urlencoded'
+            "application/x-www-form-urlencoded",
         )
         self.assertEqual(resp.status_code, 200)
-        self.assertJSONEqual(resp.content.decode('utf-8'), {'countries': []})
+        self.assertJSONEqual(resp.content.decode("utf-8"), {"countries": []})
 
         resp = self.client.post(
-            reverse('countries'),
-            json.dumps({
-                'country_ids': ["UA", "IT", "HU"],
-                'access_token': access_token
-            }),
-            'application/x-www-form-urlencoded'
+            reverse("countries"),
+            json.dumps(
+                {"country_ids": ["UA", "IT", "HU"], "access_token": access_token}
+            ),
+            "application/x-www-form-urlencoded",
         )
         self.assertEqual(resp.status_code, 200)
         self.assertJSONEqual(
-            resp.content.decode('utf-8'),
-            {'countries': ['UA', 'IT', 'HU']}
+            resp.content.decode("utf-8"), {"countries": ["UA", "IT", "HU"]}
         )

@@ -13,25 +13,24 @@ User = get_user_model()
 
 
 def fb_get_user_data(access_token, fields):
-    fields = '%2C'.join(fields)
-    req = urlopen('https://graph.facebook.com/v8.0/me'
-                  '?fields={}&access_token={}'.format(fields, access_token))
-    return json.loads(req.read().decode('utf-8'))
+    fields = "%2C".join(fields)
+    req = urlopen(
+        "https://graph.facebook.com/v8.0/me"
+        "?fields={}&access_token={}".format(fields, access_token)
+    )
+    return json.loads(req.read().decode("utf-8"))
 
 
 class ApiView(View):
     def get(self, request):
-        response = {'countries': []}
+        response = {"countries": []}
 
-        fid = request.GET.get('fid')
+        fid = request.GET.get("fid")
         if fid:
             try:
                 profile = Profile.objects.get(fid=fid)
-                countries = [
-                    country.cid
-                    for country in profile.visited_countries.all()
-                ]
-                response = {'countries': countries}
+                countries = [country.cid for country in profile.visited_countries.all()]
+                response = {"countries": countries}
             except ObjectDoesNotExist:
                 pass
 
@@ -42,36 +41,34 @@ class ApiView(View):
 
     def options(self, request, *args, **kwargs):
         response = HttpResponse()
-        response['allow'] = "GET, POST, OPTIONS"
-        response['Access-Control-Allow-Origin'] = "http://localhost:4200"
-        response['Access-Control-Allow-Methods'] = "GET, POST, OPTIONS"
-        response['Access-Control-Allow-Headers'] = "content-type"
-        response['Access-Control-Max-Age'] = "1800"
+        response["allow"] = "GET, POST, OPTIONS"
+        response["Access-Control-Allow-Origin"] = "http://localhost:4200"
+        response["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+        response["Access-Control-Allow-Headers"] = "content-type"
+        response["Access-Control-Max-Age"] = "1800"
         return response
 
     def post(self, request):
-        response = {'countries': []}
+        response = {"countries": []}
         try:
-            json_data = json.loads(request.body.decode('utf-8'))
-            access_token = json_data.get('access_token')
-            fid = json_data.get('fid')
+            json_data = json.loads(request.body.decode("utf-8"))
+            access_token = json_data.get("access_token")
+            fid = json_data.get("fid")
             if fid:
                 try:
                     profile = Profile.objects.get(fid=fid)
                     countries = [
-                        country.cid
-                        for country in profile.visited_countries.all()
+                        country.cid for country in profile.visited_countries.all()
                     ]
-                    response = {'countries': countries}
+                    response = {"countries": countries}
                 except ObjectDoesNotExist:
                     pass
             elif access_token:
                 countries = []
                 fb_user = fb_get_user_data(
-                    access_token,
-                    ['id', 'first_name', 'last_name', 'picture', 'email']
+                    access_token, ["id", "first_name", "last_name", "picture", "email"]
                 )
-                fid = fb_user.get('id')
+                fid = fb_user.get("id")
                 if fid:
                     try:
                         # Get profile is exists.
@@ -79,17 +76,17 @@ class ApiView(View):
                     except ObjectDoesNotExist:
                         # Create profile is doesn't exists.
                         user = User(
-                            email=fb_user.get('email'),
-                            password=User.objects.make_random_password()
+                            email=fb_user.get("email"),
+                            password=User.objects.make_random_password(),
                         )
-                        user.first_name = fb_user.get('first_name', 'John')
-                        user.last_name = fb_user.get('last_name', 'Doe')
+                        user.first_name = fb_user.get("first_name", "John")
+                        user.last_name = fb_user.get("last_name", "Doe")
                         user.save()
                         profile = Profile(user=user)
                         profile.fid = fid
                         profile.save()
 
-                    countries = json_data.get('country_ids')
+                    countries = json_data.get("country_ids")
                     if countries is not None:
                         # Update visited countries.
                         profile.visited_countries.clear()
@@ -100,18 +97,17 @@ class ApiView(View):
                             except ObjectDoesNotExist:
                                 pass
                     countries = [
-                        country.cid
-                        for country in profile.visited_countries.all()
+                        country.cid for country in profile.visited_countries.all()
                     ]
 
-                response = {'countries': countries}
+                response = {"countries": countries}
         except urllib.error.URLError as e:
-            response['error'] = str(e.reason)
+            response["error"] = str(e.reason)
 
         response = JsonResponse(response)
         response["Access-Control-Allow-Origin"] = "http://localhost:4200"
         response["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
         response["Access-Control-Allow-Headers"] = "content-type"
-        response['Access-Control-Max-Age'] = "1800"
+        response["Access-Control-Max-Age"] = "1800"
 
         return response

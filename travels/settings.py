@@ -5,22 +5,22 @@ Django settings for Travels project.
 import os
 import requests
 
-SITE_ENV_PREFIX = 'TRAVELS'
+SITE_ENV_PREFIX = "TRAVELS"
 
 
-def get_env_var(name, default=''):
+def get_env_var(name: str, default: str = "") -> str:
     """Get all sensitive data from google vm custom metadata."""
     try:
-        name = '_'.join([SITE_ENV_PREFIX, name])
+        name = f"{SITE_ENV_PREFIX}_{name}"
         res = os.environ.get(name)
         if res:
             # Check env variable (Jenkins build).
             return res
         else:
             res = requests.get(
-                'http://metadata.google.internal/computeMetadata/'
-                'v1/instance/attributes/{}'.format(name),
-                headers={'Metadata-Flavor': 'Google'}
+                "http://metadata.google.internal/computeMetadata/"
+                "v1/instance/attributes/{}".format(name),
+                headers={"Metadata-Flavor": "Google"},
             )
             if res.status_code == 200:
                 return res.text
@@ -37,84 +37,80 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = get_env_var(
-    'SECRET_KEY',
-    'zaa7wy8q_pnfi=)h^zei!wukd6c^x(s9z)mb-+7j)rby)q_&t2'
+    "SECRET_KEY", "zaa7wy8q_pnfi=)h^zei!wukd6c^x(s9z)mb-+7j)rby)q_&t2"
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(get_env_var('DEBUG', 'True'))
+DEBUG = bool(get_env_var("DEBUG", "True"))
 
-ALLOWED_HOSTS = get_env_var('ALLOWED_HOSTS', '*').split(',')
+ALLOWED_HOSTS = get_env_var("ALLOWED_HOSTS", "*").split(",")
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-
-    'travel'
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "travel",
 ]
 
 if DEBUG:
-    INSTALLED_APPS += ['django_jenkins']
+    INSTALLED_APPS += ["django_jenkins"]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
     # 'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
     ),
 }
 
-ROOT_URLCONF = 'travels.urls'
+ROOT_URLCONF = "travels.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'travels.wsgi.application'
+WSGI_APPLICATION = "travels.wsgi.application"
 
 
 # Database
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': get_env_var('DB_NAME', 'travels'),
-        'USER': get_env_var('DB_USER', 'travels_admin'),
-        'PASSWORD': get_env_var('DB_PASSWORD', 'travels_pass_!_45'),
-        'HOST': get_env_var('DB_HOST', '127.0.0.1'),
-        'PORT': '',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": get_env_var("DB_NAME", "travels"),
+        "USER": get_env_var("DB_USER", "travels_admin"),
+        "PASSWORD": get_env_var("DB_PASSWORD", "travels_pass_!_45"),
+        "HOST": get_env_var("DB_HOST", "127.0.0.1"),
+        "PORT": "",
     }
 }
 
@@ -123,25 +119,25 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
 
 # Internationalization
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -156,14 +152,16 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-STATIC_ROOT = '/home/voron/sites/cdn/travels'
+STATIC_ROOT = "/home/voron/sites/cdn/travels"
 
-STATIC_URL = '/static/' if DEBUG else 'https://cdn.mkeda.me/travels/'
+STATIC_URL = "/static/" if DEBUG else "https://cdn.mkeda.me/travels/"
 
-JENKINS_TASKS = ('django_jenkins.tasks.run_pylint',
-                 'django_jenkins.tasks.run_pep8',
-                 'django_jenkins.tasks.run_pyflakes',)
+JENKINS_TASKS = (
+    "django_jenkins.tasks.run_pylint",
+    "django_jenkins.tasks.run_pep8",
+    "django_jenkins.tasks.run_pyflakes",
+)
 
-PROJECT_APPS = ['travel', 'travels']
+PROJECT_APPS = ["travel", "travels"]
 
-PYLINT_LOAD_PLUGIN = ['pylint_django']
+PYLINT_LOAD_PLUGIN = ["pylint_django"]

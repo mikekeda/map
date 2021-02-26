@@ -8,7 +8,7 @@ from django.dispatch import receiver
 User = get_user_model()
 
 
-@receiver(pre_save, sender=User, dispatch_uid='autocreate_username')
+@receiver(pre_save, sender=User, dispatch_uid="autocreate_username")
 def create_username(sender, instance, **kwargs):
     # Try to generate username with given first_name and last_name.
     if not instance.username and instance.first_name and instance.last_name:
@@ -31,6 +31,7 @@ def create_username(sender, instance, **kwargs):
 
 class Country(models.Model):
     """Country model"""
+
     cid = models.CharField(max_length=3, unique=True)
     name = models.CharField(max_length=60, blank=True)
 
@@ -39,15 +40,8 @@ class Country(models.Model):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-        related_name='profile'
-    )
-    visited_countries = models.ManyToManyField(
-        Country,
-        related_name='visitors'
-    )
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+    visited_countries = models.ManyToManyField(Country, related_name="visitors")
     fid = models.BigIntegerField()
 
     def __str__(self):
