@@ -154,7 +154,7 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = "/home/voron/sites/cdn/travels"
 
-STATIC_URL = "/static/" if DEBUG else "https://cdn.mkeda.me/travels/"
+STATIC_URL = "/static/" if DEBUG else "https://storage.googleapis.com/cdn.mkeda.me/map/"
 
 JENKINS_TASKS = (
     "django_jenkins.tasks.run_pylint",
