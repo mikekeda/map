@@ -15,9 +15,9 @@ User = get_user_model()
 # Need to update access token on each run,
 # https://developers.facebook.com/apps/674727196042358/roles/test-users/
 access_token = (
-    "EAAJlqSrXJHYBAGtUyxvcZC607kMAnXEO80HIJZCBJPm74Noj3B8KZB6hUNmTtIvA5FJ27lWG6J6a4rEy"
-    "CkWPkkdw7b4R48dFrV5SioyUCZBv0mVb1B5cRt8lZALMruBw5eZAd1yt7GZAFZBwvnV3GmvvRB1DUftK4"
-    "ZAMPZB6VJYXi31P0O5f7ZClqZBbwEAWITiKCPNZBOqMk3J7gn0vZAnZBBwJJxb"
+    "EAAJlqSrXJHYBAJa5zyDvoDbzZABDLIJTUp4HHDM0M3tcsUGDZAZAMoACFO9gLRcPPQRZCh47KcHZCZBK"
+    "d0uNBNt5ZAbE8Ql9KaBBQZBI20GHIN9BeCNCt3j2eErWbql2ZBk2Tjiebjtmu1uMVem4zZBMI1iQWeddZ"
+    "BAFnyBAcUZBXtPZA6LtZCHoYRoswPeVZCykBMsh02ueXELQllB9LeWleBZBZA0t1"
 )
 
 
