@@ -15,13 +15,14 @@ User = get_user_model()
 def fb_get_user_data(access_token, fields):
     fields = "%2C".join(fields)
     req = urlopen(
-        "https://graph.facebook.com/v8.0/me"
-        "?fields={}&access_token={}".format(fields, access_token)
+        "https://graph.facebook.com/v10.0/me"
+        f"?fields={fields}&access_token={access_token}"
     )
     return json.loads(req.read().decode("utf-8"))
 
 
 class ApiView(View):
+    # noinspection PyMethodMayBeStatic
     def get(self, request):
         response = {"countries": []}
 
@@ -48,6 +49,7 @@ class ApiView(View):
         response["Access-Control-Max-Age"] = "1800"
         return response
 
+    # noinspection PyMethodMayBeStatic
     def post(self, request):
         response = {"countries": []}
         try:
