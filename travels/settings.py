@@ -155,6 +155,7 @@ STATICFILES_DIRS = [
 STATIC_ROOT = "/home/voron/sites/cdn/travels"
 
 STATIC_URL = "/static/" if DEBUG else "https://storage.googleapis.com/cdn.mkeda.me/map/"
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 JENKINS_TASKS = (
     "django_jenkins.tasks.run_pylint",
