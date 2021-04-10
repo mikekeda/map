@@ -9,16 +9,13 @@ from django.urls import reverse
 
 from travel.models import Profile, Country
 from travel.views import fb_get_user_data
+from travels.settings import get_env_var
 
 User = get_user_model()
 
 # Need to update access token on each run,
 # https://developers.facebook.com/apps/674727196042358/roles/test-users/
-access_token = (
-    "EAAJlqSrXJHYBABvXfkLzpXWObg4FoxKeT2GhAyjophuj0rWXKTve3jhS6UDRRF3iGPU459E920IGSP2X"
-    "23FlnZC6gVIk42Oj3rtNDCTnJhfq2ZBIx9ncxEK0YaiJKdSoyTy0UTIkZB8UO82cYPEEf1VfeCAmWOFC4"
-    "GVHOtDszFYpijZAYGo3VWJe0dzPn5DxfZBI5awOFCZCFtXZCbk6FkM"
-)
+access_token = get_env_var("TEST_FB_ACCESS_TOKEN")
 
 
 class TravelViewTest(TestCase):

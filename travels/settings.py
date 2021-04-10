@@ -25,7 +25,8 @@ def get_env_var(name: str, default: str = "") -> str:
             if res.status_code == 200:
                 return res.text
     except requests.exceptions.ConnectionError:
-        return default
+        pass
+
     return default
 
 
