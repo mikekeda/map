@@ -1,5 +1,5 @@
 demjson==2.2.4
-Django==3.2.9
+Django==4.0
 gunicorn==20.1.0
 psycopg2-binary==2.9.2
 requests==2.26.0
