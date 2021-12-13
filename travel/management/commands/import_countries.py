@@ -1,5 +1,7 @@
+import json
+import re
+
 from django.core.management import BaseCommand
-import demjson
 
 from travel.models import Country
 
@@ -10,13 +12,16 @@ class Command(BaseCommand):
     help = "Import countries from countries list in Angular2"
 
     def handle(self, *args, **options):
+        quote_keys_regex = r"([\{\s,])(\w+)(:)"
         file_name = "frontend/src/app/countries.ts"
         self.stdout.write("Started countries import")
 
         with open(file_name) as f:
             for line in reversed(list(f)):
+                line = line.strip().strip(",")
+                line = re.sub(quote_keys_regex, r'\1"\2"\3', line)
                 try:
-                    raw_country = demjson.decode(line.strip().strip(","))
+                    raw_country = json.loads(line)
                     if "id" in raw_country and "title" in raw_country:
                         cid = raw_country.get("id")
                         title = raw_country.get("title")
@@ -30,6 +35,6 @@ class Command(BaseCommand):
                             self.stdout.write(
                                 "{} already exists".format(raw_country.get("title"))
                             )
-                except demjson.JSONDecodeError:
+                except json.JSONDecodeError:
                     # Skip not valid lines.
                     pass
