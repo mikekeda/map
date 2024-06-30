@@ -1,6 +1,8 @@
-from io import StringIO
 import json
+import secrets
+import string
 import sys
+from io import StringIO
 
 from django.contrib.auth import get_user_model
 from django.core.management import call_command
@@ -30,7 +32,10 @@ class TravelViewTest(TestCase):
 
         # Create usual user.
         test_user = User.objects.create_user(
-            username="testuser", password=User.objects.make_random_password()
+            username="testuser",
+            password="".join(
+                secrets.choice(string.ascii_letters + string.digits) for i in range(9)
+            ),
         )
         test_user.save()
 

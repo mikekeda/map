@@ -1,3 +1,6 @@
+import secrets
+import string
+
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
@@ -9,7 +12,9 @@ User = get_user_model()
 class TravelModelsTest(TestCase):
     def setUp(self):
         # Create usual user.
-        self.password = User.objects.make_random_password()
+        self.password = "".join(
+            secrets.choice(string.ascii_letters + string.digits) for i in range(9)
+        )
         test_user = User.objects.create_user(
             username="testuser",
             password=self.password,

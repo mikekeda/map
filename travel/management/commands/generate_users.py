@@ -1,8 +1,10 @@
 import random
+import secrets
+import string
 import time
 
-from django.core.management import BaseCommand
 from django.contrib.auth import get_user_model
+from django.core.management import BaseCommand
 
 from travel.models import Profile, Country
 
@@ -56,7 +58,10 @@ class Command(BaseCommand):
                     first_name=dummy_first_name,
                     last_name=dummy_last_name,
                     email=dummy_email,
-                    password=User.objects.make_random_password(),
+                    password="".join(
+                        secrets.choice(string.ascii_letters + string.digits)
+                        for i in range(9)
+                    ),
                 )
                 user.save()
 
@@ -67,6 +72,6 @@ class Command(BaseCommand):
 
                 # Add visited countries.
                 visited = random.randint(1, 15)
-                visited = random.sample(set(countries), visited)
+                visited = random.sample(list(countries), visited)
                 profile.visited_countries.add(*visited)
                 self.stdout.write("{} was created".format(user.username))

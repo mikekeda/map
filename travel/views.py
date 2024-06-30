@@ -1,13 +1,16 @@
-from urllib.request import urlopen
-import urllib.error
 import json
+import ssl
+import urllib.error
+from urllib.request import urlopen
 
-from django.http import HttpResponse, JsonResponse
-from django.views.generic import View
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponse, JsonResponse
+from django.views.generic import View
 
 from travel.models import Profile, Country
+
+ssl._create_default_https_context = ssl._create_unverified_context
 
 User = get_user_model()
 
@@ -15,7 +18,7 @@ User = get_user_model()
 def fb_get_user_data(access_token, fields):
     fields = "%2C".join(fields)
     req = urlopen(
-        "https://graph.facebook.com/v10.0/me"
+        "https://graph.facebook.com/v19.0/me"
         f"?fields={fields}&access_token={access_token}"
     )
     return json.loads(req.read().decode("utf-8"))
