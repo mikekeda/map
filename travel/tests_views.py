@@ -33,9 +33,7 @@ class TravelViewTest(TestCase):
         # Create usual user.
         test_user = User.objects.create_user(
             username="testuser",
-            password="".join(
-                secrets.choice(string.ascii_letters + string.digits) for i in range(9)
-            ),
+            password="".join(secrets.choice(string.ascii_letters + string.digits) for i in range(9)),
         )
         test_user.save()
 
@@ -92,12 +90,8 @@ class TravelViewTest(TestCase):
 
         resp = self.client.post(
             reverse("countries"),
-            json.dumps(
-                {"country_ids": ["UA", "IT", "HU"], "access_token": access_token}
-            ),
+            json.dumps({"country_ids": ["UA", "IT", "HU"], "access_token": access_token}),
             "application/x-www-form-urlencoded",
         )
         self.assertEqual(resp.status_code, 200)
-        self.assertJSONEqual(
-            resp.content.decode("utf-8"), {"countries": ["UA", "IT", "HU"]}
-        )
+        self.assertJSONEqual(resp.content.decode("utf-8"), {"countries": ["UA", "IT", "HU"]})

@@ -12,9 +12,7 @@ User = get_user_model()
 class TravelModelsTest(TestCase):
     def setUp(self):
         # Create usual user.
-        self.password = "".join(
-            secrets.choice(string.ascii_letters + string.digits) for i in range(9)
-        )
+        self.password = "".join(secrets.choice(string.ascii_letters + string.digits) for i in range(9))
         test_user = User.objects.create_user(
             username="testuser",
             password=self.password,

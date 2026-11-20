@@ -28,13 +28,9 @@ class Command(BaseCommand):
                         _, created = Country.objects.get_or_create(cid=cid, name=title)
                         if created:
                             self.stdout.write(raw_country.get("title") + " was created")
-                            self.stdout.write(
-                                "{} was created".format(raw_country.get("title"))
-                            )
+                            self.stdout.write("{} was created".format(raw_country.get("title")))
                         else:
-                            self.stdout.write(
-                                "{} already exists".format(raw_country.get("title"))
-                            )
+                            self.stdout.write("{} already exists".format(raw_country.get("title")))
                 except json.JSONDecodeError:
                     # Skip not valid lines.
                     pass

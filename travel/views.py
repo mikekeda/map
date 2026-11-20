@@ -17,10 +17,7 @@ User = get_user_model()
 
 def fb_get_user_data(access_token, fields):
     fields = "%2C".join(fields)
-    req = urlopen(
-        "https://graph.facebook.com/v19.0/me"
-        f"?fields={fields}&access_token={access_token}"
-    )
+    req = urlopen("https://graph.facebook.com/v19.0/me" f"?fields={fields}&access_token={access_token}")
     return json.loads(req.read().decode("utf-8"))
 
 
@@ -62,17 +59,13 @@ class ApiView(View):
             if fid:
                 try:
                     profile = Profile.objects.get(fid=fid)
-                    countries = [
-                        country.cid for country in profile.visited_countries.all()
-                    ]
+                    countries = [country.cid for country in profile.visited_countries.all()]
                     response = {"countries": countries}
                 except ObjectDoesNotExist:
                     pass
             elif access_token:
                 countries = []
-                fb_user = fb_get_user_data(
-                    access_token, ["id", "first_name", "last_name", "picture", "email"]
-                )
+                fb_user = fb_get_user_data(access_token, ["id", "first_name", "last_name", "picture", "email"])
                 fid = fb_user.get("id")
                 if fid:
                     try:
@@ -101,9 +94,7 @@ class ApiView(View):
                                 profile.visited_countries.add(country)
                             except ObjectDoesNotExist:
                                 pass
-                    countries = [
-                        country.cid for country in profile.visited_countries.all()
-                    ]
+                    countries = [country.cid for country in profile.visited_countries.all()]
 
                 response = {"countries": countries}
         except urllib.error.URLError as e:

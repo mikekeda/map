@@ -58,10 +58,7 @@ class Command(BaseCommand):
                     first_name=dummy_first_name,
                     last_name=dummy_last_name,
                     email=dummy_email,
-                    password="".join(
-                        secrets.choice(string.ascii_letters + string.digits)
-                        for i in range(9)
-                    ),
+                    password="".join(secrets.choice(string.ascii_letters + string.digits) for i in range(9)),
                 )
                 user.save()
 

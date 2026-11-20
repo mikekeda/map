@@ -2,6 +2,7 @@
 """
 Gunicorn config.
 """
+
 bind = "unix:/uwsgi/travels.sock"
 workers = 1
 timeout = 30
